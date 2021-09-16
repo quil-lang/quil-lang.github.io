@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html>
-<!-- This document was automatically generated on 2021-07-30T12:49:26.577501-07:00. -->
+<!-- This document was automatically generated on 2021-09-15T21:45:21.574947-07:00. -->
   <head>
     <link rel='stylesheet' type='text/css' href='style.css' />
     <script src='https://polyfill.io/v3/polyfill.min.js?features=es6'></script>
@@ -25,7 +25,15 @@
   </h2>
   <ul>
 <li>
-  <a href='#1Introduction'>1. Introduction
+  <a href='#1Preamble'>1. Preamble
+  </a>
+</li>
+<li>
+  <a href='#1-1An-Introduction-to-Quil'>1.1. An Introduction to Quil
+  </a>
+</li>
+<li>
+  <a href='#1-2Annexes'>1.2. Annexes
   </a>
 </li>
 <li>
@@ -284,9 +292,65 @@
   <a href='#11-2Changes'>11.2. Changes
   </a>
 </li>
+<li>
+  <a href='#12Annex-T--Pulse-Level-Control'>12. Annex T: Pulse-Level Control
+  </a>
+</li>
+<li>
+  <a href='#12-1Frames'>12.1. Frames
+  </a>
+</li>
+<li>
+  <a href='#12-1-1DEFFRAME'>12.1.1. DEFFRAME
+  </a>
+</li>
+<li>
+  <a href='#12-1-1-1Frame-Attributes'>12.1.1.1. Frame Attributes
+  </a>
+</li>
+<li>
+  <a href='#12-2Waveforms'>12.2. Waveforms
+  </a>
+</li>
+<li>
+  <a href='#12-2-1Defining-new-waveforms'>12.2.1. Defining new waveforms
+  </a>
+</li>
+<li>
+  <a href='#12-3Pulses'>12.3. Pulses
+  </a>
+</li>
+<li>
+  <a href='#12-4Frame-Mutations'>12.4. Frame Mutations
+  </a>
+</li>
+<li>
+  <a href='#12-4-1Frequency'>12.4.1. Frequency
+  </a>
+</li>
+<li>
+  <a href='#12-4-2Phase'>12.4.2. Phase
+  </a>
+</li>
+<li>
+  <a href='#12-4-3Scale'>12.4.3. Scale
+  </a>
+</li>
+<li>
+  <a href='#12-5Capture'>12.5. Capture
+  </a>
+</li>
+<li>
+  <a href='#12-6Defining-Calibrations'>12.6. Defining Calibrations
+  </a>
+</li>
+<li>
+  <a href='#12-7Timing-and-Synchronization'>12.7. Timing and Synchronization
+  </a>
+</li>
   </ul>
 </nav><p class='aside'><b>Note: </b>This document is in <em>DRAFT STATUS</em> and is for review
-purposes only. It is being developed by the <a href='https://github.com/quil-lang/'>Quil-Lang group</a> on GitHub.</p><a name='1Introduction'><h2>1. Introduction</h2></a>
+purposes only. It is being developed by the <a href='https://github.com/quil-lang/'>Quil-Lang group</a> on GitHub.</p><a name='1Preamble'><h2>1. Preamble</h2></a><a name='1-1An-Introduction-to-Quil'><h3>1.1. An Introduction to Quil</h3></a>
 <p>This is the language specification for Quil, a language for hybrid
 classical/quantum computations.
 </p>
@@ -310,6 +374,8 @@ depositing the resulting bit into a classic bit register named <tt>ro</tt>.
 </p>
 <p>The remainder of this document serves as a reference for all Quil
 language syntax constructs and their associated semantics.
+</p><a name='1-2Annexes'><h3>1.2. Annexes</h3></a>
+<p>The Quil language is described throughout the ordinarily named sections of this document. There are additional sections, called <em>annexes</em>, which are optional extensions to the Quil language. These extensions may modify the syntax or semantics of the base specification in noted ways.
 </p><a name='2Operational-Semantic-Devices'><h2>2. Operational Semantic Devices</h2></a><a name='2-1Mathematical-Preliminaries'><h3>2.1. Mathematical Preliminaries</h3></a>
 <p>Define \(\mathscr{B}\) to be a Hilbert space isomorphic to
 \(\mathbb{C}^2\). Some texts refer to this space as a <em>qubit</em>. We
@@ -1653,6 +1719,245 @@ languages, such as OpenQASM, Quipper, Q#, and QCL.
 <p><em>This document only tracks changes since its conception.</em>
 </p>
 <p><ul><li>July 2021: Document created.</li></ul>
+</p><a name='12Annex-T--Pulse-Level-Control'><h2>12. Annex T: Pulse-Level Control</h2></a>
+<p>This section is about time-domain extensions to Quil, formally known as <em>Annex T</em> of this document, but also known as <em>Quil-T</em>.
+</p><a name='12-1Frames'><h3>12.1. Frames</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Identifier</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>String</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Identifier</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+<p>A frame encapsulates any rotating frame relative to which control/readout
+waveforms may be defined. For the purposes of scheduling and execution on
+possibly heterogenous hardware, frames are specified with respect to a specific
+list of qubits. Thus, <tt>0 1 &quot;cz&quot;</tt> is the &quot;cz&quot; frame on qubits 0 and 1. The order
+of the qubits matters. In particular, the above frame may differ from <tt>1 0 &quot;cz&quot;</tt>.
+</p><a name='12-1-1DEFFRAME'><h4>12.1.1. DEFFRAME</h4></a>
+<p>Quil-T itself has no built-in frames. Frames must be defined using the <tt>DEFFRAME</tt>
+directive.
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Definition</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFFRAME <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Specification</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>?</sup></span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Specification</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Indent</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Attribute</span><span class='meta-syntax'>&#x27E9;</span> : <span class='meta-syntax'>(</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'> | </span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>String</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span></code></p></div><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Attribute</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code>SAMPLE-RATE </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> INITIAL-FREQUENCY </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> DIRECTION </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> HARDWARE-OBJECT</code></td></tr></table></div>
+<p>All frames used in a program must have a corresponding top-level definition.
+</p>
+<p>Before execution, a Quil-T program is linked with a specific system of control
+hardware, and frames are mapped to suitable hardware objects (cf. the
+<tt>HARDWARE-OBJECT</tt> frame attribute below). Native or canonical frame definitions may be
+provided by a hardware vendor. Some examples of Rigetti&#039;s canonical frames are
+listed below, but this is subject to change.
+</p>
+<p>Examples (names only):
+
+
+<pre class='source-code'>&quot;xy&quot;  # eg. for the drive line
+&quot;ff&quot;  # eg. for a generic flux line
+&quot;cz&quot;  # eg. for a flux pulse for enacting CZ gate
+&quot;iswap&quot;
+&quot;ro&quot;  # eg. for the readout pulse
+&quot;out&quot; # eg. for the capture line</pre>
+</p><a name='12-1-1-1Frame-Attributes'><h4>12.1.1.1. Frame Attributes</h4></a>
+<p>Frame attributes represent quantities associated with a given frame which need not be specified by the programmer, but which are ultimately required to fully link and execute a Quil-T program on a physical device.
+</p><ul><li><tt>SAMPLE-RATE</tt> is a floating point number indicating the rate (in Hz) of the digital-to-analog converter on the control hardware associated with this frame.</li><li><tt>INITIAL-FREQUENCY</tt> is a floating point number indicating the initial frame frequency.</li><li><tt>DIRECTION</tt> is one of <tt>&quot;tx&quot;</tt> or <tt>&quot;rx&quot;</tt>.</li><li><tt>HARDWARE-OBJECT</tt> is a string indicating the (implementation-specific) hardware object that the frame is associated with.</li></ul><a name='12-2Waveforms'><h3>12.2. Waveforms</h3></a><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Waveform</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> flat ( duration: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, iq: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> )
+</code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> gaussian ( duration: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, fwhm: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, t0: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> )
+</code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> draggaussian ( duration: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, fwhm: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, t0: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, anh: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, alpha: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> )
+</code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> erfsquare ( duration: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, risetime: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, padleft: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, padright: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> )</code></td></tr></table></div>
+<p>Waveforms are referenced either by name or by a built-in waveform generator.
+</p>
+<p>The built-in waveform generators are:
+<ul><li><tt>flat(duration, iq)</tt> creates a flat waveform where:
+    <ul><li><tt>duration</tt> is a rational number representing the duration of the
+      waveform in seconds</li><li><tt>iq</tt> is a complex number representing the IQ value to play for the
+      duration of the waveform</li></ul></li><li><tt>gaussian(duration, fwhm, t0)</tt> creates a Gaussian waveform where:
+<ul><li><tt>duration</tt> is a rational number representing the duration of the
+      waveform in seconds</li><li><tt>fwhm</tt> is a rational number representing the full-width-half-max of
+      the waveform in seconds</li><li><tt>t0</tt> is a rational number representing the center time coordinate of
+      the waveform in seconds</li></ul></li><li><tt>draggaussian(duration, fwhm, t0, anh, alpha)</tt> creates a DRAG gaussian pulse where:
+<ul><li><tt>duration</tt> is a rational number representing the duration of the
+      waveform in seconds</li><li><tt>fwhm</tt> is a rational number representing the full-width-half-max of
+      the waveform in seconds</li><li><tt>t0</tt> is a rational number representing the center time coordinate of
+      the waveform in seconds</li><li><tt>anh</tt> is a rational number representing the anharmonicity of the qubit in
+      Hertz</li><li><tt>alpha</tt> is a rational number for the dimensionless drag parameter</li></ul></li><li><tt>erfsquare(duration, risetime, padleft, padright)</tt> creates a pulse with a flat top and edges that are error functions (erfs) where:
+<ul><li><tt>duration</tt> is a rational number representing the duration of the
+      waveform in seconds</li><li><tt>risetime</tt> is a rational number representing the rise and fall sections of
+      the pulse in seconds</li><li><tt>padleft</tt> is a rational number representing the amount of zero-amplitude
+      padding to add to the left of the pulse</li><li><tt>padright</tt> is a rational number representing the amount of zero-amplitude
+      padding to add to the right of the pulse</li></ul></li></ul>
+</p><a name='12-2-1Defining-new-waveforms'><h4>12.2.1. Defining new waveforms</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sample Rate</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Waveform Definition</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFWAVEFORM <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span> ( <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameters</span><span class='meta-syntax'>&#x27E9;</span> ) <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sample Rate</span><span class='meta-syntax'>&#x27E9;</span> : <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Matrix Entries</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+<p>New waveforms may be defined by specifying the sample rate (in
+Hertz) and listing out all the IQ values as complex numbers, separated
+by commas. Waveform definitions may also be parameterized, although
+note that Quil has no support for vector level operations.
+</p>
+<p>Example:
+
+<pre class='source-code'>DEFWAVEFORM my_custom_waveform 6.0:
+    1+2i, 3+4i, 5+6i
+
+DEFWAVEFORM my_custom_parameterized_waveform(%a) 6.0:
+    (1+2i)*%a, (3+4i)*%a, (5+6i)*%a</pre>
+</p>
+<p>The duration (in seconds) of a custom waveform may be computed by dividing the
+number of samples by the sample rate. In the above example, both waveforms have
+a duration of 0.5 seconds.
+</p><a name='12-3Pulses'><h3>12.3. Pulses</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Pulse</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>PULSE Frame Waveform</code></p></div>
+<p>Pulses represent the propagation of a specific waveform (either built-in or custom) on a specific frame.
+</p>
+<p>Examples:
+
+
+<pre class='source-code'># Simple pulse with previously defined waveform
+PULSE 0 &quot;xy&quot; my_custom_waveform
+
+# Pulse with previously defined parameterized waveform
+PULSE 0 &quot;xy&quot; my_custom_parameterized_waveform(0.5)
+
+# Pulse with built-in waveform generator
+PULSE 0 &quot;xy&quot; flat(duration: 1e-6, iq: 2+3i)
+
+# Pulse on a flux line
+PULSE 0 1 &quot;cz&quot; flat(duration: 1e-6, iq: 2+3i)</pre>
+</p>
+<p>Each frame has a fixed, hardware-specific sample rate. The behavior of a <tt>PULSE</tt>
+instruction with a custom waveform whose sample rate does not match the
+corresponding frame&#039;s sample rate is undefined.
+</p><a name='12-4Frame-Mutations'><h3>12.4. Frame Mutations</h3></a><a name='12-4-1Frequency'><h4>12.4.1. Frequency</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Set Frequency</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SET-FREQUENCY <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+<span style='color:tomato'>&lt;unknown CONS&gt;
+
+
+</span>
+<p>Each frame has a frequency which is tracked throughout the program. Initial
+frame frequencies are specified in the frame definition&#039;s <tt>INITIAL-FREQUENCY</tt>
+attribute. Subsequent code may update this, either assigning an absolute value (<tt>SET-FREQUENCY</tt>) or a relative offset (<tt>SHIFT-FREQUENCY</tt>).
+</p>
+<pre class='source-code'>SET-FREQUENCY 0 &quot;xy&quot; 5.4e9
+SHIFT-FREQUENCY 0 &quot;ro&quot; 6.1e9</pre><a name='12-4-2Phase'><h4>12.4.2. Phase</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Set Phase</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SET-PHASE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Shift Phase</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SHIFT-PHASE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Swap Phases</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SWAP-PHASES <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+<p>Each frame has a phase which is tracked throughout the program. Initially the
+phase starts out as 0. It may be set or shifted up and down, as well as swapped
+with other frames.
+</p>
+<p>The phase must be a rational real number. There is also support for
+shifted the phase based on some expression, as long as that expression returns
+a real number.
+</p>
+<p>Example:
+
+
+<pre class='source-code'>SET-PHASE 0 &quot;xy&quot; pi/2
+
+SHIFT-PHASE 0 &quot;xy&quot; -pi
+SHIFT-PHASE 0 &quot;xy&quot; %theta*2/pi
+
+SWAP-PHASE 0 &quot;xy&quot; 1 &quot;xy&quot;</pre>
+</p><a name='12-4-3Scale'><h4>12.4.3. Scale</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Set Scale</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SET-SCALE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+<p>Each frame has a scale which is tracked throughout the program. The
+scale is initially 1.
+</p>
+<p>Example:
+
+
+<pre class='source-code'>SET-SCALE 0 &quot;xy&quot; 0.75</pre>
+</p><a name='12-5Capture'><h3>12.5. Capture</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Capture</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>CAPTURE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Waveform</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Memory Reference</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Raw Capture</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>RAW-CAPTURE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Memory Reference</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+<p>The capture instruction opens up the readout on a frame and measures its state.
+An integration waveform will be applied to the raw IQ points and the result is
+placed in classical memory.
+</p>
+<p>The waveform will define the duration of the capture. The memory reference must
+be able to store a complex number for each qubit in the frame.
+</p>
+<p>In the case of a raw capture the waveform is replaced with a rational number
+representing the duration of the capture.
+</p>
+<p>Example:
+
+
+<pre class='source-code'># Simple capture of an IQ point
+DECLARE iq REAL[2]
+CAPTURE 0 &quot;out&quot; flat(1e-6, 2+3i) iq
+
+# Raw capture
+DECLARE iqs REAL[400] # length needs to be determined based on the sample rate
+CAPTURE 0 &quot;out&quot; 200e-6 iqs</pre>
+</p>
+<p>The behavior of a <tt>CAPTURE</tt> instruction with a custom waveform whose sample rate
+does not match the corresponding frame&#039;s sample rate is undefined.
+</p><a name='12-6Defining-Calibrations'><h3>12.6. Defining Calibrations</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Calibration Definition</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFCAL <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Modifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span> ( <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameters</span><span class='meta-syntax'>&#x27E9;</span> ) <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span> : <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Instruction</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Measure Calibration</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFCAL <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>?</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameter</span><span class='meta-syntax'>&#x27E9;</span> : <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Instruction</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span></code></p></div>
+<p>Calibrations for high-level gates can be defined by mapping a combination of
+(gate name, parameters, qubits) to a sequence of analog control instructions.
+</p>
+<p>Calibrations with the same gate name as a built-in gate definition or custom
+gate definition are assumed to be the same.
+</p>
+<p>Multiple calibration definitions can be defined for different parameter and
+qubit values. When a gate is translated into control instructions the
+calibration definitions are enumerated in reverse order of definition and the
+first match will be taken.
+</p>
+<p>For example, given the following list of calibration definitions in this order:
+
+<ol><li><tt>DEFCAL RX(%theta) %qubit:</tt></li><li><tt>DEFCAL RX(%theta) 0:</tt></li><li><tt>DEFCAL RX(pi/2) 0:</tt></li></ol>
+
+The instruction <tt>RX(pi/2) 0</tt> would match (3), the instruction <tt>RX(pi) 0</tt> would
+match (2), and the instruction <tt>RX(pi/2) 1</tt> would match (1).
+</p>
+<p>The same system applies for <tt>MEASURE</tt>. Although <tt>MEASURE</tt> cannot be
+parameterized, it takes only a single qubit as input, and it has an additional
+(optional) parameter for the memory reference into which to store the result.
+</p>
+<p>Examples:
+
+
+<pre class='source-code'># Simple non-parameterized gate on qubit 0
+DEFCAL X 0:
+    PULSE 0 &quot;xy&quot; gaussian(duration: 1, fwhm: 2, t0: 3)
+
+# Parameterized gate on qubit 0
+DEFCAL RX(%theta) 0:
+    PULSE 0 &quot;xy&quot; flat(duration: 1e-6, iq: 2+3i)*%theta/(2*pi)
+
+# Applying RZ to any qubit
+DEFCAL RZ(%theta) %qubit:
+    SHIFT-PHASE %qubit &quot;xy&quot; %theta
+
+# Measurement and classification
+DEFCAL MEASURE 0 %dest:
+    DECLARE iq REAL[2]
+    CAPTURE 0 &quot;out&quot; flat(1e-6, 2+3i) iq
+    LT %dest iq[0] 0.5 # thresholding</pre>
+</p>
+<p>Quil supports arbitrarily chained gate modifiers. As such, calibration
+definitions may also incorporate gate modifiers, with the convention that a
+calibration definition matches a gate application only if the modifiers match
+exactly. Thus in
+
+
+<pre class='source-code'>DEFCAL T 0:
+    # ...
+
+DEFCAL DAGGER T 0:
+    # ...</pre>
+
+the first calibration definition matches <tt>T 0</tt>, the second matches <tt>DAGGER T 0</tt>,
+and neither match <tt>DAGGER DAGGER T 0</tt>.
+</p><a name='12-7Timing-and-Synchronization'><h3>12.7. Timing and Synchronization</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Delay</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DELAY <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Fence</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>FENCE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span></code></p></div>
+<p>Delay allows for the insertion of a gap within a list of pulses or gates with
+a specified duration in seconds.
+</p>
+<p>If frame names are specified, then the delay instruction affects those frames on
+those qubits. If no frame names are specified, all frames on precisely those
+qubits are affected.
+</p><p class='aside'><b>Note: </b>Note: this excludes frames which <em>intersect</em> the
+specified qubits but involve others. For example, <tt>DELAY 0 1.0</tt> delays one qubit
+frames on <tt>0</tt>, such as <tt>0 &quot;xy&quot;</tt>, but leaves other frames, such as <tt>0 1 &quot;cz&quot;</tt>,
+unaffected.</p>
+<p>Fence ensures that all operations involving the specified qubits that follow the
+fence statement happen after all operations involving the specified qubits that
+preceed the fence statement. If no qubits are specified, the <tt>FENCE</tt> operation
+implicitly applies to all qubits on the device.
+</p>
+<p>Examples:
+
+
+<pre class='source-code'>X 0
+FENCE 0 1
+X 1 # This X gate will be applied to qubit 1 AFTER the X gate on qubit 0
+
+# Simple T1 experiment
+X 0
+DELAY 0 100e-6
+MEASURE 0 ro[0]</pre>
 </p>
   </body>
 </html>
