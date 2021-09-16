@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html>
-<!-- This document was automatically generated on 2021-09-15T21:45:21.574947-07:00. -->
+<!-- This document was automatically generated on 2021-09-15T21:53:18.671331-07:00. -->
   <head>
     <link rel='stylesheet' type='text/css' href='style.css' />
     <script src='https://polyfill.io/v3/polyfill.min.js?features=es6'></script>
@@ -1813,11 +1813,7 @@ PULSE 0 1 &quot;cz&quot; flat(duration: 1e-6, iq: 2+3i)</pre>
 <p>Each frame has a fixed, hardware-specific sample rate. The behavior of a <tt>PULSE</tt>
 instruction with a custom waveform whose sample rate does not match the
 corresponding frame&#039;s sample rate is undefined.
-</p><a name='12-4Frame-Mutations'><h3>12.4. Frame Mutations</h3></a><a name='12-4-1Frequency'><h4>12.4.1. Frequency</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Set Frequency</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SET-FREQUENCY <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
-<span style='color:tomato'>&lt;unknown CONS&gt;
-
-
-</span>
+</p><a name='12-4Frame-Mutations'><h3>12.4. Frame Mutations</h3></a><a name='12-4-1Frequency'><h4>12.4.1. Frequency</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Set Frequency</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SET-FREQUENCY <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Shift Frequency</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SHIFT-FREQUENCY <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
 <p>Each frame has a frequency which is tracked throughout the program. Initial
 frame frequencies are specified in the frame definition&#039;s <tt>INITIAL-FREQUENCY</tt>
 attribute. Subsequent code may update this, either assigning an absolute value (<tt>SET-FREQUENCY</tt>) or a relative offset (<tt>SHIFT-FREQUENCY</tt>).
