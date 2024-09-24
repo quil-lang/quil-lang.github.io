@@ -1,10 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html>
-<!-- This document was automatically generated on 2021-09-15T21:53:18.671331-07:00. -->
+<!-- This document was automatically generated on 2024-09-24T15:28:09.742564-07:00. -->
   <head>
     <link rel='stylesheet' type='text/css' href='style.css' />
-    <script src='https://polyfill.io/v3/polyfill.min.js?features=es6'></script>
     <script id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>
     <title>Quil Specification
     </title>
@@ -113,6 +112,18 @@
   </a>
 </li>
 <li>
+  <a href='#4-2-5Sequence-Gate-Definitions'>4.2.5. Sequence Gate Definitions
+  </a>
+</li>
+<li>
+  <a href='#4-2-5-1Semantics'>4.2.5.1. Semantics
+  </a>
+</li>
+<li>
+  <a href='#4-2-5-2Example'>4.2.5.2. Example
+  </a>
+</li>
+<li>
   <a href='#4-3Standard-Gate-Definitions'>4.3. Standard Gate Definitions
   </a>
 </li>
@@ -213,23 +224,35 @@
   </a>
 </li>
 <li>
-  <a href='#6-3-6Examples'>6.3.6. Examples
+  <a href='#6-3-6Initialization-of-Declared-Memory'>6.3.6. Initialization of Declared Memory
   </a>
 </li>
 <li>
-  <a href='#6-3-6-1Register-Machine-with-a-Condition-Bit'>6.3.6.1. Register Machine with a Condition Bit
+  <a href='#6-3-7Examples'>6.3.7. Examples
   </a>
 </li>
 <li>
-  <a href='#6-3-6-2Memory-Mapped-RAM'>6.3.6.2. Memory-Mapped RAM
+  <a href='#6-3-7-1Register-Machine-with-a-Condition-Bit'>6.3.7.1. Register Machine with a Condition Bit
   </a>
 </li>
 <li>
-  <a href='#6-3-6-3Computing-Bits-of-an-Angle'>6.3.6.3. Computing Bits of an Angle
+  <a href='#6-3-7-2Memory-Mapped-RAM'>6.3.7.2. Memory-Mapped RAM
+  </a>
+</li>
+<li>
+  <a href='#6-3-7-3Computing-Bits-of-an-Angle'>6.3.7.3. Computing Bits of an Angle
   </a>
 </li>
 <li>
   <a href='#6-4Memory-Access-and-Dereferencing'>6.4. Memory Access and Dereferencing
+  </a>
+</li>
+<li>
+  <a href='#6-4-1Volatility-of-Classical-Memory'>6.4.1. Volatility of Classical Memory
+  </a>
+</li>
+<li>
+  <a href='#6-4-2Operations-for-Accessing-Memory'>6.4.2. Operations for Accessing Memory
   </a>
 </li>
 <li>
@@ -245,11 +268,15 @@
   </a>
 </li>
 <li>
-  <a href='#8-1Halting-the-Program'>8.1. Halting the Program
+  <a href='#8-1Suspending-Execution'>8.1. Suspending Execution
   </a>
 </li>
 <li>
-  <a href='#8-2Program-Labels-and-Branching'>8.2. Program Labels and Branching
+  <a href='#8-2Halting-the-Program'>8.2. Halting the Program
+  </a>
+</li>
+<li>
+  <a href='#8-3Program-Labels-and-Branching'>8.3. Program Labels and Branching
   </a>
 </li>
 <li>
@@ -265,7 +292,27 @@
   </a>
 </li>
 <li>
-  <a href='#9-3File-Inclusion'>9.3. File Inclusion
+  <a href='#9-3Extern-Functions'>9.3. Extern Functions
+  </a>
+</li>
+<li>
+  <a href='#9-3-1Declaring-Externs'>9.3.1. Declaring Externs
+  </a>
+</li>
+<li>
+  <a href='#9-3-2Extern-Signature-Pragmas'>9.3.2. Extern Signature Pragmas
+  </a>
+</li>
+<li>
+  <a href='#9-3-3Call-Instructions'>9.3.3. Call Instructions
+  </a>
+</li>
+<li>
+  <a href='#9-3-4Externs-in-Arithmetic-Expressions'>9.3.4. Externs in Arithmetic Expressions
+  </a>
+</li>
+<li>
+  <a href='#9-4File-Inclusion'>9.4. File Inclusion
   </a>
 </li>
 <li>
@@ -350,7 +397,7 @@
 </li>
   </ul>
 </nav><p class='aside'><b>Note: </b>This document is in <em>DRAFT STATUS</em> and is for review
-purposes only. It is being developed by the <a href='https://github.com/quil-lang/'>Quil-Lang group</a> on GitHub.</p><a name='1Preamble'><h2>1. Preamble</h2></a><a name='1-1An-Introduction-to-Quil'><h3>1.1. An Introduction to Quil</h3></a>
+purposes only. It is being developed by the <a href='https://github.com/quil-lang/'>Quil-Lang group</a> on GitHub.</p><a name='1Preamble' href='#1Preamble'><h2>1. Preamble</h2></a><a name='1-1An-Introduction-to-Quil' href='#1-1An-Introduction-to-Quil'><h3>1.1. An Introduction to Quil</h3></a>
 <p>This is the language specification for Quil, a language for hybrid
 classical/quantum computations.
 </p>
@@ -374,9 +421,9 @@ depositing the resulting bit into a classic bit register named <tt>ro</tt>.
 </p>
 <p>The remainder of this document serves as a reference for all Quil
 language syntax constructs and their associated semantics.
-</p><a name='1-2Annexes'><h3>1.2. Annexes</h3></a>
+</p><a name='1-2Annexes' href='#1-2Annexes'><h3>1.2. Annexes</h3></a>
 <p>The Quil language is described throughout the ordinarily named sections of this document. There are additional sections, called <em>annexes</em>, which are optional extensions to the Quil language. These extensions may modify the syntax or semantics of the base specification in noted ways.
-</p><a name='2Operational-Semantic-Devices'><h2>2. Operational Semantic Devices</h2></a><a name='2-1Mathematical-Preliminaries'><h3>2.1. Mathematical Preliminaries</h3></a>
+</p><a name='2Operational-Semantic-Devices' href='#2Operational-Semantic-Devices'><h2>2. Operational Semantic Devices</h2></a><a name='2-1Mathematical-Preliminaries' href='#2-1Mathematical-Preliminaries'><h3>2.1. Mathematical Preliminaries</h3></a>
 <p>Define \(\mathscr{B}\) to be a Hilbert space isomorphic to
 \(\mathbb{C}^2\). Some texts refer to this space as a <em>qubit</em>. We
 may refer to it as a <em>qubit space</em>.
@@ -405,7 +452,7 @@ notation.</p>
 <p>Define \(\mathscr{U}(d)\) to be the <em>projective special
 unitary group of dimension \(d\)</em>.
 </p><p class='aside'><b>Note: </b>Note that many texts write &quot;PSU&quot; instead of &quot;U&quot;. We will often
-say &quot;unitary&quot; when we really mean &quot;projective special unitary&quot;.</p><a name='2-2The-Quantum-Abstract-Machine'><h3>2.2. The Quantum Abstract Machine</h3></a>
+say &quot;unitary&quot; when we really mean &quot;projective special unitary&quot;.</p><a name='2-2The-Quantum-Abstract-Machine' href='#2-2The-Quantum-Abstract-Machine'><h3>2.2. The Quantum Abstract Machine</h3></a>
 <p>The semantics of Quil are defined operationally; that is, each
 instruction of a Quil program is described by a change of some
 state. This state is described by a mathematical object called the
@@ -424,7 +471,7 @@ state. This state is described by a mathematical object called the
 
 This forms a \(6\)-tuple \((\Phi, C, G, G', P, \kappa)\). We may refer
 to such a tuple as a QAM.
-</p><a name='3Structure-of-a-Quil-Program'><h2>3. Structure of a Quil Program</h2></a><a name='3-1Meta-Syntax'><h3>3.1. Meta-Syntax</h3></a>
+</p><a name='3Structure-of-a-Quil-Program' href='#3Structure-of-a-Quil-Program'><h2>3. Structure of a Quil Program</h2></a><a name='3-1Meta-Syntax' href='#3-1Meta-Syntax'><h3>3.1. Meta-Syntax</h3></a>
 <p>In order to describe the syntax and semantics of a Quil program, we
 use a syntax that is similar to <em>extended Backus-Naur form</em>,
 though we deviate occasionally for convenience. While Quil&#039;s grammar
@@ -441,7 +488,7 @@ elements are or are not allowed.
 </p><p class='aside'><b>Note: </b>When writing a recursive-descent parser, one would likely use
 contextual flags to allow or disallow certain parsing rules, like
 flags indicating the permission or lack thereof to use
-identifiers. This leads to considerably shorter and clearer code.</p><a name='3-2Syntactic-Rudiments'><h3>3.2. Syntactic Rudiments</h3></a>
+identifiers. This leads to considerably shorter and clearer code.</p><a name='3-2Syntactic-Rudiments' href='#3-2Syntactic-Rudiments'><h3>3.2. Syntactic Rudiments</h3></a>
 <p>Before proceeding to describe each component of a Quil program, it
 will be useful to establish a few common pieces of syntax which will
 be used later.
@@ -449,7 +496,7 @@ be used later.
 <p>The Quil language is represented as text. The text must be encoded
 as UTF-8. The standard language constructs of Quil are all expressible
 in the ASCII subset of UTF-8, but user programs may use codepoints
-outside of UTF-8.
+outside of ASCII.
 </p>
 <p>Except when noted explicitly, whitespace has no significance and is
 ignored. Tokens can be separated by arbitrary amounts and kinds of
@@ -497,7 +544,7 @@ hyphen &#039;<tt>-</tt>&#039;.
 <pre class='source-code'>ADD AND AS CONTROLLED CONVERT DAGGER DECLARE DEFCIRCUIT DEFGATE DIV EQ
 EXCHANGE FORKED GE GT HALT INCLUDE IOR JUMP JUMP-UNLESS JUMP-WHEN
 LABEL LE LOAD LT MATRIX MEASURE MOVE MUL NEG NOP NOT OFFSET PAULI-SUM
-PERMUTATION PRAGMA RESET SHARING STORE SUB WAIT XOR</pre>
+PERMUTATION PRAGMA RESET SHARING STORE SUB WAIT XOR EXTERN CALL</pre>
 </p>
 <p>The following identifiers are also reserved (for standard gate
 definitions):
@@ -515,7 +562,7 @@ sign, with no whitespace in between.
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Argument</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
 <p>Several formal arguments are separated by spaces, unlike
 parameters.
-</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Arguments</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Argument</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span></code></p></div><a name='3-2-1Arithmetic-Expressions'><h4>3.2.1. Arithmetic Expressions</h4></a>
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Arguments</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Argument</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span></code></p></div><a name='3-2-1Arithmetic-Expressions' href='#3-2-1Arithmetic-Expressions'><h4>3.2.1. Arithmetic Expressions</h4></a>
 <p>Frequently, various kinds of arithmetic expressions are needed. A
 simple and not unusual grammar defines these arithmetic expressions.
 </p>
@@ -533,7 +580,7 @@ associativity directions.
 <pre class='source-code'>^     RIGHT
 * /   LEFT
 + -   LEFT</pre>
-</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> + <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> - <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> * <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> / <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> ^ <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Term</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Term</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code>- <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span> ( <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> )
+</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> + <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> - <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> * <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> / <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> ^ <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Term</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Term</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code>- <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span> ( <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression List</span><span class='meta-syntax'>&#x27E9;</span> )
     </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> ( <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> )
     </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Complex</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameter</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Memory Reference</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div>
 <p>A <em>constant expression</em> is an arithmetic expression which does
@@ -542,24 +589,24 @@ not contain any parameters, memory references, or identifiers.
 <p>We use comma-separated lists of arithmetic expressions frequently
 enough to warrant their own production.
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression List</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>,
-            <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>*</sup></span></code></p></div><a name='3-3Main-Program-Elements'><h3>3.3. Main Program Elements</h3></a>
+            <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>*</sup></span></code></p></div><a name='3-3Main-Program-Elements' href='#3-3Main-Program-Elements'><h3>3.3. Main Program Elements</h3></a>
 <p>A Quil program consists of declarations, directives, and
 instructions.
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Program</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Program Element</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span></code></p></div><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Program Element</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Declaration</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Newline</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'> | </span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-descriptive'>End of File</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Directive</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Terminator</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Instruction</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Terminator</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div>
 <p>A <em>declaration</em> typically specifies the existence of a named
 object, like classical memory registers.
-</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Declaration</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Gate Definition</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Circuit Definition</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Classical Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div>
+</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Declaration</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Gate Definition</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Circuit Definition</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Classical Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Extern Function Declaration</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Terminator</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div>
 <p>A <em>directive</em> specifies information to software processing
 Quil, such as the <tt>INCLUDE</tt> directive for including files.
 </p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Directive</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Pragma</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Label</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>File Include</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div>
 <p>An <em>instruction</em> is an actual run-time executable effect.
-</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Gate Application</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Measurement Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Circuit Application</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Classical Memory Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Reset Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Wait Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Branch Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>No-Operation Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Halt Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><a name='3-4Comments'><h3>3.4. Comments</h3></a>
+</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Gate Application</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Measurement Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Circuit Application</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Classical Memory Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Extern Call Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Reset Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Wait Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Branch Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>No-Operation Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Halt Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><a name='3-4Comments' href='#3-4Comments'><h3>3.4. Comments</h3></a>
 <p>Comments may exist syntactically, but do not change the semantics
 of the program. Text including and following the &#039;<tt>#</tt>&#039; character are ignored up
 to the end of the line.
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Comment</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>#[^\n]<span class='meta-syntax'><sup>*</sup></span></code></p></div>
 <p>There are no block comments.
-</p><a name='4Quantum-Gates'><h2>4. Quantum Gates</h2></a><a name='4-1Qubits-and-Quantum-State'><h3>4.1. Qubits and Quantum State</h3></a>
+</p><a name='4Quantum-Gates' href='#4Quantum-Gates'><h2>4. Quantum Gates</h2></a><a name='4-1Qubits-and-Quantum-State' href='#4-1Qubits-and-Quantum-State'><h3>4.1. Qubits and Quantum State</h3></a>
 <p>A Quil program manipulates quantum resources called <em>qubits</em>. Qubits are indexed by non-negative integers.
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Integer</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
 <p>Qubit indexes have no significance on their own. Qubits must always
@@ -573,7 +620,7 @@ can always be statically determined.
 </p>
 <p>Sometimes, a qubit may instead have a formal argument in its
 place. This may not be possible in all cases.
-</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Formal Qubit</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Argument</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><a name='4-2Quantum-Gate-Definitions'><h3>4.2. Quantum Gate Definitions</h3></a><a name='4-2-1Structure-of-a-Gate-Definition'><h4>4.2.1. Structure of a Gate Definition</h4></a>
+</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Formal Qubit</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Argument</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><a name='4-2Quantum-Gate-Definitions' href='#4-2Quantum-Gate-Definitions'><h3>4.2. Quantum Gate Definitions</h3></a><a name='4-2-1Structure-of-a-Gate-Definition' href='#4-2-1Structure-of-a-Gate-Definition'><h4>4.2.1. Structure of a Gate Definition</h4></a>
 <p>A gate definition allows us to name a unitary operation for
 subsequent use in a program. A gate definition in general has the
 following structure:
@@ -583,7 +630,7 @@ following structure:
 <p>Here, the <tt>&lt;name&gt;</tt> names the gate, the <tt>&lt;kind&gt;</tt> states how we
 are defining the gate, and the <tt>&lt;body&gt;</tt> depends on the <tt>kind</tt>. For
 certain gates, <tt>&lt;params&gt;</tt> specifies parameters to the gate.
-</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Gate Definition</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Matrix Gate Definition</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Permutation Gate Definition</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Pauli Sum Gate Definition</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><a name='4-2-2Definition-by-Matrix'><h4>4.2.2. Definition by Matrix</h4></a>
+</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Gate Definition</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Matrix Gate Definition</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Permutation Gate Definition</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Pauli Sum Gate Definition</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sequence Gate Definition</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><a name='4-2-2Definition-by-Matrix' href='#4-2-2Definition-by-Matrix'><h4>4.2.2. Definition by Matrix</h4></a>
 <p>A gate can be defined by its matrix of complex numbers represented
 in the computational basis with the aforementioned ordering.
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Matrix Gate Definition</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFGATE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>(<span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameters</span><span class='meta-syntax'>&#x27E9;</span>)<span class='meta-syntax'>)</span><span class='meta-syntax'><sup>?</sup></span><span class='meta-syntax'>(</span>AS MATRIX<span class='meta-syntax'>)</span><span class='meta-syntax'><sup>?</sup></span>:
@@ -599,7 +646,7 @@ expressions, most often simple integers or real numbers.
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Matrix Entry Line</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>, <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>*</sup></span></code></p></div>
 <p>The arithmetic expressions may either be constant or refer to the
 parameters of the defined gate.
-</p><a name='4-2-3Definition-by-Permutation'><h4>4.2.3. Definition by Permutation</h4></a>
+</p><a name='4-2-3Definition-by-Permutation' href='#4-2-3Definition-by-Permutation'><h4>4.2.3. Definition by Permutation</h4></a>
 <p>A <em>permutation gate</em> is one that permutes the coefficients of
 the wavefunction. A permutation \(p\) can be specified mathematically
 as an ordering of the integers between \(0\) and \(n-1\) written out
@@ -615,7 +662,7 @@ integers.
         <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Integer</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>+</sup></span></code></p></div>
 <p>There must be at least two integers specified, and the number of
 integers specified must be a power-of-two.
-</p><a name='4-2-4Definition-by-Pauli-Sum'><h4>4.2.4. Definition by Pauli Sum</h4></a>
+</p><a name='4-2-4Definition-by-Pauli-Sum' href='#4-2-4Definition-by-Pauli-Sum'><h4>4.2.4. Definition by Pauli Sum</h4></a>
 <p>Quantum gates can be defined by an associated Hamiltonian, as in
 
 \[U(\mathbf t) = \exp(-i \mathcal H(\mathbf t))\]
@@ -639,7 +686,7 @@ tensor product of Pauli operators.
     references only real numeric literals as well as parameters from
     the <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameters</span><span class='meta-syntax'>&#x27E9;</span> list of the gate definition.</li><li><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Arguments</span><span class='meta-syntax'>&#x27E9;</span> in a <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Pauli Term</span><span class='meta-syntax'>&#x27E9;</span> must only refer to
     arguments that exist in the gate definition.</li></ul>
-</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Pauli Word</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>(</span>I <span class='meta-syntax'> | </span> X <span class='meta-syntax'> | </span> Y <span class='meta-syntax'> | </span> Z<span class='meta-syntax'>)</span><span class='meta-syntax'><sup>+</sup></span></code></p></div><a name='4-2-4-1Semantics'><h4>4.2.4.1. Semantics</h4></a>
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Pauli Word</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>(</span>I <span class='meta-syntax'> | </span> X <span class='meta-syntax'> | </span> Y <span class='meta-syntax'> | </span> Z<span class='meta-syntax'>)</span><span class='meta-syntax'><sup>+</sup></span></code></p></div><a name='4-2-4-1Semantics' href='#4-2-4-1Semantics'><h4>4.2.4.1. Semantics</h4></a>
 <p>We describe how one is intended to extract a matrix presentation of
 an operator from such a Pauli sum, and then we remit the discussion of
 semantics to that for <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Matrix Gate Definition</span><span class='meta-syntax'>&#x27E9;</span>.
@@ -650,24 +697,24 @@ semantics to that for <span class='meta-syntax'>&#x27E8;</span><span class='meta
     header. Simultaneously, sort the letters appearing in the Pauli
     word to match.</li><li>Using the Quil-standard matrix definitions of <tt>I</tt>, <tt>X</tt>,
     <tt>Y</tt>, and <tt>Z</tt>, associate to each Pauli term&#039;s Pauli word the
-    ordered tensor product of these basic matrices.</li><li>Scale each such matrix by the Pauli term&#039;s <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>.</li><li>Sum the matrices, multiply by \(i=\sqrt{-1}\), and form the
+    ordered tensor product of these basic matrices.</li><li>Scale each such matrix by the Pauli term&#039;s <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>.</li><li>Sum the matrices, multiply by \(-i=-\sqrt{-1}\), and form the
    matrix exponential.</li></ol>
 </p>
 <p>See the next sections for an example semantic reduction.
-</p><a name='4-2-4-2Example-Syntax'><h4>4.2.4.2. Example Syntax</h4></a>
+</p><a name='4-2-4-2Example-Syntax' href='#4-2-4-2Example-Syntax'><h4>4.2.4.2. Example Syntax</h4></a>
 <p>Many standard examples of gates admit short expression in these terms:
 
 
 <pre class='source-code'>DEFGATE RY(%theta) q AS PAULI-SUM:
-    Y(-%theta/2) q</pre>
+    Y(%theta/2) q</pre>
 
 This also includes many standard multi-qubit operators:
 
 
 <pre class='source-code'>DEFGATE CPHASE(%theta) p q AS PAULI-SUM:
-    ZZ(-%theta/4) p q
-    Z(%theta/4) p
-    Z(%theta/4) q
+    ZZ(%theta/4) p q
+    Z(-%theta/4) p
+    Z(-%theta/4) q
 
 DEFGATE CAN(%alpha, %beta, %gamma) p q AS PAULI-SUM:
     XX(%alpha/4) p q
@@ -679,7 +726,7 @@ It also includes some operators encountered in practice, e.g., the following red
 
 <pre class='source-code'>DEFGATE UCC-H2(%theta) p q r s AS PAULI-SUM:
     YXXX(%theta) p q r s</pre>
-</p><a name='4-2-4-3Example-Semantic-Reduction-of-CPHASE'><h4>4.2.4.3. Example Semantic Reduction of CPHASE</h4></a>
+</p><a name='4-2-4-3Example-Semantic-Reduction-of-CPHASE' href='#4-2-4-3Example-Semantic-Reduction-of-CPHASE'><h4>4.2.4.3. Example Semantic Reduction of CPHASE</h4></a>
 <p>In the example definition of <tt>CPHASE</tt> above, these steps proceed as follows:
 
 <ol><li>We replace <tt>ZZ p q</tt> with <tt>ZZ p q</tt> (i.e., no change), <tt>Z p</tt>
@@ -695,11 +742,11 @@ It also includes some operators encountered in practice, e.g., the following red
       \end{align*}\]
       where we have elided zero entries.</li><li>After rescaling by the associated expressions, these matrices become
 
-      \[\left( \begin{smallmatrix}-\theta/4 \\ & \theta/4 \\ & & \theta/4 \\ & & & -\theta/4 \end{smallmatrix} \right)
+      \[\left( \begin{smallmatrix}\theta/4 \\ & -\theta/4 \\ & & -\theta/4 \\ & & & \theta/4 \end{smallmatrix} \right)
         \qquad
-        \left( \begin{smallmatrix}\theta/4 \\ & \theta/4 \\ & & -\theta/4 \\ & & & -\theta/4 \end{smallmatrix} \right)
+        \left( \begin{smallmatrix}-\theta/4 \\ & -\theta/4 \\ & & \theta/4 \\ & & & \theta/4 \end{smallmatrix} \right)
         \qquad
-        \left( \begin{smallmatrix}\theta/4 \\ & -\theta/4 \\ & & \theta/4 \\ & & & -\theta/4 \end{smallmatrix} \right).\]</li><li>Taking the sum and multiplying by \(i\) yields
+        \left( \begin{smallmatrix}-\theta/4 \\ & \theta/4 \\ & & -\theta/4 \\ & & & \theta/4 \end{smallmatrix} \right).\]</li><li>Taking the sum and multiplying by \(-i\) yields
 
       \[\left( \begin{smallmatrix}i\theta/4 \\ & i\theta/4 \\ & & i\theta/4 \\ & & & -3i\theta/4 \end{smallmatrix} \right),\]
 
@@ -709,7 +756,50 @@ It also includes some operators encountered in practice, e.g., the following red
 
 Up to global phase, this is evidently equivalent to the usual <tt>AS
 MATRIX</tt> definition (as specified in the next section).
-</p><a name='4-3Standard-Gate-Definitions'><h3>4.3. Standard Gate Definitions</h3></a><a name='4-3-1Pauli-Gates'><h4>4.3.1. Pauli Gates</h4></a>\[\begin{align*}
+</p><a name='4-2-5Sequence-Gate-Definitions' href='#4-2-5Sequence-Gate-Definitions'><h4>4.2.5. Sequence Gate Definitions</h4></a>
+<p>A gate can be defined by a sequence of other gate applications on formal arguments.
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sequence Gate Definition</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFGATE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>(<span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameters</span><span class='meta-syntax'>&#x27E9;</span>)<span class='meta-syntax'>)</span><span class='meta-syntax'><sup>?</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Arguments</span><span class='meta-syntax'>&#x27E9;</span>
+AS SEQUENCE:
+<span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sequence Line</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span><span class='meta-syntax'>(</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Newline</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'> | </span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-descriptive'>End of File</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span></code></p></div>
+<p>A sequence element is effectively a gate application where the formal qubit must be an argument.
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sequence Element</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Modifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>(
+                <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression List</span><span class='meta-syntax'>&#x27E9;</span>
+            )<span class='meta-syntax'>)</span><span class='meta-syntax'><sup>?</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Argument</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sequence Line</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Indent</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sequence Element</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>;<span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sequence Element</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>*</sup></span></code></p></div><a name='4-2-5-1Semantics' href='#4-2-5-1Semantics'><h4>4.2.5.1. Semantics</h4></a>
+<p>Each argument of a <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sequence Element</span><span class='meta-syntax'>&#x27E9;</span> must correspond to an <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Argument</span><span class='meta-syntax'>&#x27E9;</span> contained in <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Arguments</span><span class='meta-syntax'>&#x27E9;</span> found in the gate definition header (An <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Argument</span><span class='meta-syntax'>&#x27E9;</span> is not a <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span>). An <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> in the <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression List</span><span class='meta-syntax'>&#x27E9;</span> may reference a <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameter</span><span class='meta-syntax'>&#x27E9;</span> from <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameters</span><span class='meta-syntax'>&#x27E9;</span> found in the gate definition header.
+</p>
+<p>The unitary for a sequence gate should be the result of multiplying each unitary from that gate&#039;s sequence elements in the order they appear in the body. The resulting unitary should cover the combined space of the arguments for that gate definition, including unused arguments.
+</p>
+<p>Sequence gate definitions may refer to one another, but any circularity (e.g., defining \(X\) as the product \(BXA\) for some unitary operators \(A\) and \(B\)) is disallowed.
+</p><a name='4-2-5-2Example' href='#4-2-5-2Example'><h4>4.2.5.2. Example</h4></a>
+<p>A \(T\) gate on two qubits is:
+</p>
+<pre class='source-code'>DEFGATE TT p q AS SEQUENCE:
+    T p
+    T q</pre>
+<p>The standard gate `CSWAP` (Toffoli) could be defined with the following definition:
+</p>
+<pre class='source-code'>DEFGATE TOFFOLI p q r AS SEQUENCE:
+    H        r
+    CNOT     q r
+    DAGGER T r
+    CNOT     p r
+    T        r
+    CNOT     q r
+    DAGGER T r
+    CNOT     p r
+    #Note the use of TT here
+    TT       q r
+    CNOT     p q
+    H        r
+    T        p
+    DAGGER T q
+    CNOT     p q</pre>
+<p>An arbitrary Euler rotation could be expressed as:
+</p>
+<pre class='source-code'>DEFGATE EULER(%alpha, %beta, %gamma) p AS SEQUENCE:
+    RY(%alpha) p
+    RZ(%beta)  p 
+    RY(%gamma) p</pre><a name='4-3Standard-Gate-Definitions' href='#4-3Standard-Gate-Definitions'><h3>4.3. Standard Gate Definitions</h3></a><a name='4-3-1Pauli-Gates' href='#4-3-1Pauli-Gates'><h4>4.3.1. Pauli Gates</h4></a>\[\begin{align*}
 \texttt{I} &= \left(\begin{smallmatrix}
 1 & 0\\
 0 & 1
@@ -729,10 +819,10 @@ i & 0
 1 & 0\\
 0 & -1
 \end{smallmatrix}\right)
-\end{align*}\]<a name='4-3-2Hadamard-Gate'><h4>4.3.2. Hadamard Gate</h4></a>\[\texttt{H} = \tfrac{1}{\sqrt{2}}\left(\begin{smallmatrix}
+\end{align*}\]<a name='4-3-2Hadamard-Gate' href='#4-3-2Hadamard-Gate'><h4>4.3.2. Hadamard Gate</h4></a>\[\texttt{H} = \tfrac{1}{\sqrt{2}}\left(\begin{smallmatrix}
 1 & 1\\
 1 & -1
-\end{smallmatrix}\right)\]<a name='4-3-3Phase-Gates'><h4>4.3.3. Phase Gates</h4></a>\[\begin{align*}
+\end{smallmatrix}\right)\]<a name='4-3-3Phase-Gates' href='#4-3-3Phase-Gates'><h4>4.3.3. Phase Gates</h4></a>\[\begin{align*}
 \texttt{PHASE}(\theta) &= \left(\begin{smallmatrix}
 1 & 0\\
 0 & e^{i\theta}
@@ -741,7 +831,7 @@ i & 0
 \texttt{S} &= \texttt{PHASE}(\pi/2)
 &
 \texttt{T} &= \texttt{PHASE}(\pi/4)
-\end{align*}\]<a name='4-3-4Controlled-Phase-Gates'><h4>4.3.4. Controlled-Phase Gates</h4></a>\[\begin{align*}
+\end{align*}\]<a name='4-3-4Controlled-Phase-Gates' href='#4-3-4Controlled-Phase-Gates'><h4>4.3.4. Controlled-Phase Gates</h4></a>\[\begin{align*}
 \texttt{CPHASE00}(\theta) &= \operatorname{diag}(e^{i\theta},1,1,1) \\
 \texttt{CPHASE01}(\theta) &= \operatorname{diag}(1,e^{i\theta},1,1) \\
 \texttt{CPHASE10}(\theta) &= \operatorname{diag}(1,1,e^{i\theta},1) \\
@@ -753,7 +843,7 @@ i & 0
 
 <pre class='source-code'>CZ == CONTROLLED Z
 CPHASE = CONTROLLED PHASE</pre>
-</p><a name='4-3-5Cartesian-Rotation-Gates'><h4>4.3.5. Cartesian Rotation Gates</h4></a>\[\begin{align*}
+</p><a name='4-3-5Cartesian-Rotation-Gates' href='#4-3-5Cartesian-Rotation-Gates'><h4>4.3.5. Cartesian Rotation Gates</h4></a>\[\begin{align*}
 \texttt{RX}(\theta) &= \left(\begin{smallmatrix}
 \cos\frac{\theta}{2} & -i\sin\frac{\theta}{2}\\
 -i\sin\frac{\theta}{2} & \cos\frac{\theta}{2}
@@ -766,7 +856,7 @@ CPHASE = CONTROLLED PHASE</pre>
 e^{-i\theta/2} & 0\\
 0 & e^{i\theta/2}
 \end{smallmatrix}\right)
-\end{align*}\]<a name='4-3-6Controlled-X-Gates'><h4>4.3.6. Controlled-X Gates</h4></a>\[\begin{align*}
+\end{align*}\]<a name='4-3-6Controlled-X-Gates' href='#4-3-6Controlled-X-Gates'><h4>4.3.6. Controlled-X Gates</h4></a>\[\begin{align*}
 \texttt{CNOT} &=
 \left(
 \begin{smallmatrix}
@@ -796,7 +886,7 @@ gate</em>. It is a universal classical logic gate.</p>
 
 <pre class='source-code'>CNOT  == CONTROLLED X
 CCNOT == CONTROLLED CONTROLLED X</pre>
-</p><a name='4-3-7Swap-Gates'><h4>4.3.7. Swap Gates</h4></a>\[\begin{align*}
+</p><a name='4-3-7Swap-Gates' href='#4-3-7Swap-Gates'><h4>4.3.7. Swap Gates</h4></a>\[\begin{align*}
 \texttt{PSWAP}(\theta) &=
 \left(
 \begin{smallmatrix}
@@ -836,7 +926,7 @@ gate</em>. It is a universal classical logic gate.</p>
 
 
 <pre class='source-code'>CSWAP == CONTROLLED SWAP</pre>
-</p><a name='4-3-8Other-Gates'><h4>4.3.8. Other Gates</h4></a>\[\begin{align*}
+</p><a name='4-3-8Other-Gates' href='#4-3-8Other-Gates'><h4>4.3.8. Other Gates</h4></a>\[\begin{align*}
 \texttt{XY}(\theta) &= \exp\left( -i\theta(\texttt{X}^{\otimes 2} + \texttt{Y}^{\otimes 2}) \right)
                      = \texttt{PISWAP}(\theta)\\
 \texttt{CAN}(\alpha, \beta, \gamma) &=
@@ -858,10 +948,10 @@ matrix definition:
     (cis((%alpha-%beta+%gamma)/2)-cis((%alpha+%beta-%gamma)/2))/2, 0, 0, (cis((%alpha+%beta-%gamma)/2)+cis((%alpha-%beta+%gamma)/2))/2</pre>
 
 It also has a straightforward definition as a <tt>PAULI-SUM</tt>.
-</p><a name='4-4Quantum-Gate-Applications'><h3>4.4. Quantum Gate Applications</h3></a><a name='4-4-1Syntax-and-Semantics'><h4>4.4.1. Syntax and Semantics</h4></a>
+</p><a name='4-4Quantum-Gate-Applications' href='#4-4Quantum-Gate-Applications'><h3>4.4. Quantum Gate Applications</h3></a><a name='4-4-1Syntax-and-Semantics' href='#4-4-1Syntax-and-Semantics'><h4>4.4.1. Syntax and Semantics</h4></a>
 <p>A gate is applied via the following syntax.
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Gate Application</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Modifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>(
-                <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression List</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>?</sup></span>
+                <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression List</span><span class='meta-syntax'>&#x27E9;</span>
             )<span class='meta-syntax'>)</span><span class='meta-syntax'><sup>?</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Formal Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span></code></p></div>
 <p>We refer to Section II.A of <a href='https://arxiv.org/abs/1608.03355'><em>A Practical Quantum
 Instruction Set Architecture</em></a> for extensive and detailed mathematical
@@ -873,7 +963,7 @@ operator on the Hilbert space of the QAM.
     </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> CONTROLLED
     </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> FORKED(<span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression List</span><span class='meta-syntax'>&#x27E9;</span>)</code></td></tr></table></div>
 <p>These are described in the next sections.
-</p><a name='4-4-2DAGGER-Gate-Modifier'><h4>4.4.2. DAGGER Gate Modifier</h4></a>
+</p><a name='4-4-2DAGGER-Gate-Modifier' href='#4-4-2DAGGER-Gate-Modifier'><h4>4.4.2. DAGGER Gate Modifier</h4></a>
 <p>The <tt>DAGGER</tt> modifier represents the adjoint operation or
 complex-conjugate transpose. Since every gate is a unitary operator,
 this is just the inverse. For example, if <tt>G</tt> is a gate described by
@@ -921,7 +1011,7 @@ is equivalent to
 <pre class='source-code'>PHASE(-t) q</pre>
 
 for all \(\mathtt{t}\in\mathbb{R}\).
-</p><a name='4-4-3CONTROLLED-Gate-Modifier'><h4>4.4.3. CONTROLLED Gate Modifier</h4></a>
+</p><a name='4-4-3CONTROLLED-Gate-Modifier' href='#4-4-3CONTROLLED-Gate-Modifier'><h4>4.4.3. CONTROLLED Gate Modifier</h4></a>
 <p>The <tt>CONTROLLED</tt> modifier takes some gate <tt>G</tt> acting on some
 number of qubits <tt>q1</tt> to <tt>qn</tt> and makes it conditioned on the
 state of some new qubit <tt>c</tt>. In terms of the matrix representation,
@@ -963,7 +1053,13 @@ then \(C(U)\) is
 0 & 0 & a & b \\
 0 & 0 & c & d \\
 \end{pmatrix}.\]
-</p><a name='4-4-4FORKED-Gate-Modifier'><h4>4.4.4. FORKED Gate Modifier</h4></a>
+</p><p class='aside'><b>Note: </b>The <tt>CONTROLLED</tt> modifier is sensitive to
+phase. Mathematically, for a gate \(G\) and a phase angle \(\theta\),
+\(C(G)\neq C(e^{i\theta}G)\). Practically, this means that while the
+standard gates <tt>Z</tt> and <tt>PHASE</tt> are equivalent operators in
+\(\mathscr{U}(2)\) despite different matrix entries, their controlled
+variants (i.e., <tt>CZ</tt> and <tt>CONTROLLED PHASE</tt>) are <em>not</em>
+equivalent.</p><a name='4-4-4FORKED-Gate-Modifier' href='#4-4-4FORKED-Gate-Modifier'><h4>4.4.4. FORKED Gate Modifier</h4></a>
 <p>Let <tt>G</tt> be a parametric gate of \(k\) parameters <tt>r1</tt> to <tt>rk</tt>
 and \(n\) qubits <tt>q1</tt> to <tt>qn</tt>. This is written:
 
@@ -1025,7 +1121,7 @@ that can be described by the matrix
 0          & 0         & \operatorname{cis}(-\theta_1/2) & 0         \\
 0          & 0         & 0          & \operatorname{cis}(\theta_1/2) \\
 \end{pmatrix}.\]
-</p><a name='4-4-5Chaining-Modifiers'><h4>4.4.5. Chaining Modifiers</h4></a>
+</p><a name='4-4-5Chaining-Modifiers' href='#4-4-5Chaining-Modifiers'><h4>4.4.5. Chaining Modifiers</h4></a>
 <p>When gate modifiers are chained, they consume qubits left-to-right,
 so that in the following example, the <tt>CONTROLLED</tt> modifier is
 conditioned on qubit <tt>0</tt>, <tt>FORKED</tt> on qubit <tt>1</tt>, and the gate
@@ -1064,7 +1160,7 @@ decision tree, where an edge label like <tt>q2=0</tt> means that qubit
 |      /                  \                     /                   \        |
 | RX(pi) 0              RX(pi/2) 0        RX(pi/4) 0              RX(pi/8) 0 |
 +----------------------------------------------------------------------------+</pre>
-</p><a name='5Quantum-State-Reset'><h2>5. Quantum State Reset</h2></a>
+</p><a name='5Quantum-State-Reset' href='#5Quantum-State-Reset'><h2>5. Quantum State Reset</h2></a>
 <p>The quantum state may be reset to \(\bar \psi_0\) (i.e., all qubits
 in the ground state) by issuing a reset instruction.
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>State Reset Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>RESET</code></p></div>
@@ -1074,9 +1170,9 @@ in the ground state) by issuing a reset instruction.
 </p>
 <pre class='source-code'>if 1 == MEASURE(qubit) then X(qubit)</pre>
 <p>These make up the ways the quantum state may be reset.
-</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Reset Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>State Reset Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit Reset Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><a name='6Classical-Memory'><h2>6. Classical Memory</h2></a>
+</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Reset Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>State Reset Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit Reset Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><a name='6Classical-Memory' href='#6Classical-Memory'><h2>6. Classical Memory</h2></a>
 <p>This section explains Quil&#039;s classical memory model.
-</p><a name='6-1Design-Considerations'><h3>6.1. Design Considerations</h3></a><em>This section is descriptive and not normative.</em>
+</p><a name='6-1Design-Considerations' href='#6-1Design-Considerations'><h3>6.1. Design Considerations</h3></a><em>This section is descriptive and not normative.</em>
 <p>In assembly code, in general, types are considered only at the
 mnemonic or interpretation level. They&#039;re not often a consideration in
 the code itself. (Though this is not always true, machine codes for
@@ -1192,7 +1288,7 @@ for(angle = 0.0; angle &lt; 6.283185307179586; angle += 0.3926990816987241) {
         stats += measurement
     }
 }</pre>
-</p><a name='6-2Types'><h3>6.2. Types</h3></a>
+</p><a name='6-2Types' href='#6-2Types'><h3>6.2. Types</h3></a>
 <p>The supported types are <tt>BIT</tt> which represents one bit, <tt>OCTET</tt>
 which represents 8 bits, <tt>INTEGER</tt> which represents a machine-sized
 signed integer, and <tt>REAL</tt> which represents a machine-sized real
@@ -1215,7 +1311,7 @@ octets, and is guaranteed to hold at least the values \(-127\) to
 \(128\).
 </p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Type</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Base Type</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Base Type</span><span class='meta-syntax'>&#x27E9;</span>[<span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Integer</span><span class='meta-syntax'>&#x27E9;</span>]</code></td></tr></table></div>
 <p>There are currently no provisions for adding additional types.
-</p><a name='6-3Declaring-Memory'><h3>6.3. Declaring Memory</h3></a>
+</p><a name='6-3Declaring-Memory' href='#6-3Declaring-Memory'><h3>6.3. Declaring Memory</h3></a>
 <p>Quil doesn&#039;t have a notion of <em>allocating</em> memory, but rather
 the notion of <em>declaring the existence</em> of memory. In the
 following, we introduce the <tt>DECLARE</tt> directive, which describes
@@ -1230,7 +1326,7 @@ which Quil is executed.
 <p>The <tt>DECLARE</tt> directive is used to declare a vector of typed
 memory. There are three variants: plain declaration, aliased
 declaration, and aliased declaration with offset.
-</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Classical Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Plain Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Aliased Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Offset Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><a name='6-3-1Declaring-Memory'><h4>6.3.1. Declaring Memory</h4></a>
+</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Classical Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Plain Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Aliased Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Offset Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><a name='6-3-1Declaring-Memory' href='#6-3-1Declaring-Memory'><h4>6.3.1. Declaring Memory</h4></a>
 <p>The simplest kind of memory declaration is a plain one.
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Plain Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DECLARE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Type</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
 <p>This declares that <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span> designates memory which can hold
@@ -1244,7 +1340,7 @@ DECLARE x INTEGER[1]</pre>
 </p>
 <p>In the program that would follow either of these declarations,
 <tt>x</tt> or equivalently <tt>x[0]</tt> will refer to an integer quantity.
-</p><a name='6-3-2Declaring-Aliased-Memory'><h4>6.3.2. Declaring Aliased Memory</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Aliased Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DECLARE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><sub><span class='meta-syntax-identifier'>1</span></sub><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Type</span><span class='meta-syntax'>&#x27E9;</span> SHARING <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><sub><span class='meta-syntax-identifier'>2</span></sub><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+</p><a name='6-3-2Declaring-Aliased-Memory' href='#6-3-2Declaring-Aliased-Memory'><h4>6.3.2. Declaring Aliased Memory</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Aliased Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DECLARE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><sub><span class='meta-syntax-identifier'>1</span></sub><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Type</span><span class='meta-syntax'>&#x27E9;</span> SHARING <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><sub><span class='meta-syntax-identifier'>2</span></sub><span class='meta-syntax'>&#x27E9;</span></code></p></div>
 <p>This declares that <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><sub><span class='meta-syntax-identifier'>1</span></sub><span class='meta-syntax'>&#x27E9;</span> designates memory which can hold
 <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Type</span><span class='meta-syntax'>&#x27E9;</span>, but <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><sub><span class='meta-syntax-identifier'>1</span></sub><span class='meta-syntax'>&#x27E9;</span> shares memory with that which is designated
 by <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><sub><span class='meta-syntax-identifier'>2</span></sub><span class='meta-syntax'>&#x27E9;</span>. Here, the total memory size pointed to by
@@ -1254,7 +1350,7 @@ by <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'
 <p>An implementation is free to reject programs where particular
 instances of sharing is invalid (e.g., alignment is violated;
 disparate memories are unshareable; etc.).
-</p><a name='6-3-3Declaring-Aliased-Memory-Declaration-with-an-Offset'><h4>6.3.3. Declaring Aliased Memory Declaration with an Offset</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Offset Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DECLARE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><sub><span class='meta-syntax-identifier'>1</span></sub><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Type</span><span class='meta-syntax'>&#x27E9;</span>
+</p><a name='6-3-3Declaring-Aliased-Memory-Declaration-with-an-Offset' href='#6-3-3Declaring-Aliased-Memory-Declaration-with-an-Offset'><h4>6.3.3. Declaring Aliased Memory Declaration with an Offset</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Offset Memory Declaration</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DECLARE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><sub><span class='meta-syntax-identifier'>1</span></sub><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Type</span><span class='meta-syntax'>&#x27E9;</span>
         SHARING <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><sub><span class='meta-syntax-identifier'>2</span></sub><span class='meta-syntax'>&#x27E9;</span>
         OFFSET
         <span class='meta-syntax'>(</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Integer</span><sub><span class='meta-syntax-identifier'>i</span></sub><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Type</span><sub><span class='meta-syntax-identifier'>i</span></sub><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>+</sup></span></code></p></div>
@@ -1269,7 +1365,7 @@ to memory a total of \[\sum_i \langle\texttt{Integer}_i\rangle\cdot
 <p>Implementations may enforce alignment by way of erroring if the
 stated declaration is invalid. Implementations must <em>not</em> round
 up or down to alignment boundaries.
-</p><a name='6-3-4Portability-of-Aliased-Declarations'><h4>6.3.4. Portability of Aliased Declarations</h4></a>
+</p><a name='6-3-4Portability-of-Aliased-Declarations' href='#6-3-4Portability-of-Aliased-Declarations'><h4>6.3.4. Portability of Aliased Declarations</h4></a>
 <p>Aliased declarations with mixed types require an intimate view of
 the target architecture. The widths of each data type, which are
 hitherto unspecified, must be known. For example, the following
@@ -1293,9 +1389,11 @@ could result in any value for <tt>b</tt>, depending on the implementation.
 <p>An implementation shall describe the bit-level description of the
 types, the available declarable memories, the limits on the declared
 memory, alignment requirements, and limits on sharing and offsets.
-</p><a name='6-3-5Duplicate-Declaration-Identifiers'><h4>6.3.5. Duplicate Declaration Identifiers</h4></a>
+</p><a name='6-3-5Duplicate-Declaration-Identifiers' href='#6-3-5Duplicate-Declaration-Identifiers'><h4>6.3.5. Duplicate Declaration Identifiers</h4></a>
 <p>It is an error to declare the same name more than once.
-</p><a name='6-3-6Examples'><h4>6.3.6. Examples</h4></a><a name='6-3-6-1Register-Machine-with-a-Condition-Bit'><h4>6.3.6.1. Register Machine with a Condition Bit</h4></a>
+</p><a name='6-3-6Initialization-of-Declared-Memory' href='#6-3-6Initialization-of-Declared-Memory'><h4>6.3.6. Initialization of Declared Memory</h4></a>
+<p>Memory that is declared is not assumed to be initialized in any way.
+</p><a name='6-3-7Examples' href='#6-3-7Examples'><h4>6.3.7. Examples</h4></a><a name='6-3-7-1Register-Machine-with-a-Condition-Bit' href='#6-3-7-1Register-Machine-with-a-Condition-Bit'><h4>6.3.7.1. Register Machine with a Condition Bit</h4></a>
 <p>Here we consider a layout for a machine that has one integer
 register, two real registers, and a <em>condition bit</em> used for
 doing comparisons and branching.
@@ -1308,7 +1406,7 @@ DECLARE cmp BIT    # cmp for &quot;comparison&quot;</pre>
 </p>
 <p>This might be suitable for a very simple quantum control system
 with a single counter for loops.
-</p><a name='6-3-6-2Memory-Mapped-RAM'><h4>6.3.6.2. Memory-Mapped RAM</h4></a>
+</p><a name='6-3-7-2Memory-Mapped-RAM' href='#6-3-7-2Memory-Mapped-RAM'><h4>6.3.7.2. Memory-Mapped RAM</h4></a>
 <p>The following is an example of a memory structure that might be
 used in a system with a fixed and known memory layout optimized for
 running QAOA-like circuits.
@@ -1333,7 +1431,7 @@ does not have any ability generate memory maps automatically. If that
 functionality were possible, one could simply declare <tt>beta</tt>,
 <tt>gamma</tt>, and <tt>ro</tt> and let the compilation software take care of
 mapping that to physical memory.
-</p><a name='6-3-6-3Computing-Bits-of-an-Angle'><h4>6.3.6.3. Computing Bits of an Angle</h4></a>
+</p><a name='6-3-7-3Computing-Bits-of-an-Angle' href='#6-3-7-3Computing-Bits-of-an-Angle'><h4>6.3.7.3. Computing Bits of an Angle</h4></a>
 <p>In algorithms like phase estimation, we compute one bit of the result
 at a time with each measurement. If our <tt>INTEGER</tt> data type has the
 standard binary representation, then one can do:
@@ -1374,7 +1472,24 @@ angle on qubit <tt>16</tt>:
 
 
 <pre class='source-code'>RZ(theta) 16</pre>
-</p><a name='6-4Memory-Access-and-Dereferencing'><h3>6.4. Memory Access and Dereferencing</h3></a>
+</p><a name='6-4Memory-Access-and-Dereferencing' href='#6-4Memory-Access-and-Dereferencing'><h3>6.4. Memory Access and Dereferencing</h3></a><a name='6-4-1Volatility-of-Classical-Memory' href='#6-4-1Volatility-of-Classical-Memory'><h4>6.4.1. Volatility of Classical Memory</h4></a>
+<p>Memory referenced in Quil is assumed to be shared with other
+processors. As such, the memory can be changed at any time outside of
+the semantics given by a particular Quil program. We refer to this
+property as <em>volatility</em>.
+</p>
+<p>Programs processing Quil are not required to assume that memory is
+volatile, and as such are permitted to re-order reads and writes to a
+memory location (either directly or through sharing), so long as their
+in-program order is not changed. Implementations are encouraged to
+allow memory to be declared as <em>non-volatile</em> by way of a pragma,
+such as:
+
+
+<pre class='source-code'>PRAGMA NON-VOLATILE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span></pre>
+
+though implementations are not required to support it.
+</p><a name='6-4-2Operations-for-Accessing-Memory' href='#6-4-2Operations-for-Accessing-Memory'><h4>6.4.2. Operations for Accessing Memory</h4></a>
 <p>Memory is dereferenced in a Quil program using common array
 access syntax. In particular, given a name <tt>x</tt> pointing to
 memory of type \(T\), and a non-negative integer offset \(n\), the
@@ -1398,7 +1513,7 @@ DECLARE z INTEGER[16]
 DECLARE t INTEGER
 LOAD t y z[3]          # t := y[z[3]]
 LOAD t x t             # t := x[t]</pre>
-</p><a name='6-5Classical-Instructions'><h3>6.5. Classical Instructions</h3></a>
+</p><a name='6-5Classical-Instructions' href='#6-5Classical-Instructions'><h3>6.5. Classical Instructions</h3></a>
 <p>With typed memory comes a bag of new instructions. Classical
 instructions come in unary (single-argument), binary
 (double-argument), and ternary (triple-argument) forms. They all share
@@ -1522,7 +1637,7 @@ LE       r a b          # r := (a &lt;= b)
          &lt;bit&gt; &lt;int&gt; &lt;int&gt;
          &lt;bit&gt; &lt;int&gt; &lt;!int&gt;
          &lt;bit&gt; &lt;real&gt; &lt;real&gt;
-         &lt;bit&gt; &lt;real&gt; &lt;!real&gt;</pre><a name='7Measurement'><h2>7. Measurement</h2></a>
+         &lt;bit&gt; &lt;real&gt; &lt;!real&gt;</pre><a name='7Measurement' href='#7Measurement'><h2>7. Measurement</h2></a>
 <p>Measurement is the only way in which the quantum state can affect
 classical memory. Measurement comes in two flavors:
 <em>measurement-for-effect</em> and <em>measurement-for-record</em>.
@@ -1543,7 +1658,22 @@ location if the qubit was measured to be in the zero-state, and a
 </p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Measurement Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Measurement for Effect</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Measurement for Record</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div>
 <p>Note that there is no way in Quil to measure all qubits
 simultaneously.
-</p><a name='8Classical-Control'><h2>8. Classical Control</h2></a><a name='8-1Halting-the-Program'><h3>8.1. Halting the Program</h3></a>
+</p><a name='8Classical-Control' href='#8Classical-Control'><h2>8. Classical Control</h2></a><a name='8-1Suspending-Execution' href='#8-1Suspending-Execution'><h3>8.1. Suspending Execution</h3></a>
+<p>For some quantum programs, execution must be suspended until some
+classical computations are performed and corresponding classical state
+is modified. This is accomplished using the <tt>WAIT</tt> instruction, a
+synchronization primitive which signals to the classical computer that
+computation will not continue until some condition is satisfied. WAIT
+takes no arguments.
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Wait Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>WAIT</code></p></div>
+<p>In the QAM model of Quil, <tt>WAIT</tt> delineates instructions that
+happen before the instruction, and those that happen after. The
+classical state of the QAM can change prior to and upon resumption of
+execution.
+</p>
+<p>The precise mechanism by which <tt>WAIT</tt> works is deliberately
+unspecified.
+</p><a name='8-2Halting-the-Program' href='#8-2Halting-the-Program'><h3>8.2. Halting the Program</h3></a>
 <p>The program is <em>halted</em> if it is no longer executing. This may
 happen under one of three conditions:
 
@@ -1551,7 +1681,7 @@ happen under one of three conditions:
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Halt Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>HALT</code></p></div>
 <p>Error conditions may happen, for instance, when a division-by-zero
 occurs. There may be other ways in which an implementation may error.
-</p><a name='8-2Program-Labels-and-Branching'><h3>8.2. Program Labels and Branching</h3></a>
+</p><a name='8-3Program-Labels-and-Branching' href='#8-3Program-Labels-and-Branching'><h3>8.3. Program Labels and Branching</h3></a>
 <p>Run-time control flow is achieved through a variety of branching
 instructions. Each branching instructions requires a target place in
 the program to jump to. These target places are denoted by
@@ -1582,9 +1712,9 @@ and only if <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-id
 that is non-zero (resp. exactly zero).
 </p>
 <p>Together, these form the branching instructions.
-</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Branch Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Unconditional Branch Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Conditional Branch Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><a name='9Other-Instructions-and-Directives'><h2>9. Other Instructions and Directives</h2></a><a name='9-1No-Operation-Instruction'><h3>9.1. No-Operation Instruction</h3></a>
+</p><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Branch Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Unconditional Branch Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Conditional Branch Instruction</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr></table></div><a name='9Other-Instructions-and-Directives' href='#9Other-Instructions-and-Directives'><h2>9. Other Instructions and Directives</h2></a><a name='9-1No-Operation-Instruction' href='#9-1No-Operation-Instruction'><h3>9.1. No-Operation Instruction</h3></a>
 <p>The <em>no-operation instruction</em> or <em><tt>NOP</tt> instruction</em> is an instruction which does not affect the classical or quantum state of the QAM. It only affects the control state by incrementing the program counter by \(1\).
-</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>No-Operation Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>NOP</code></p></div><a name='9-2Pragmas'><h3>9.2. Pragmas</h3></a>
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>No-Operation Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>NOP</code></p></div><a name='9-2Pragmas' href='#9-2Pragmas'><h3>9.2. Pragmas</h3></a>
 <p>Programs that process Quil code may want to take advantage of extra
 information provided by the programmer. This is especially true when
 targeting quantum processors where additional information about the
@@ -1592,14 +1722,99 @@ machine&#x2019;s characteristics affect how the program will be
 processed. Quil supports a <tt>PRAGMA</tt> directive to include extra
 information in a program which does not otherwise affect execution
 semantics.
-</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Pragma</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>PRAGMA <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'> | </span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Integer</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>*</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>String</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>?</sup></span></code></p></div><a name='9-3File-Inclusion'><h3>9.3. File Inclusion</h3></a>
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Pragma</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>PRAGMA <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'> | </span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Integer</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>*</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>String</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>?</sup></span></code></p></div><a name='9-3Extern-Functions' href='#9-3Extern-Functions'><h3>9.3. Extern Functions</h3></a>
+<p>Programmers and researchers may wish to avail themselves of a rich
+vocabulary of analytic and stochastic functions in the designs of
+their experiments and algorithms. Quantum control systems or quantum
+simulators that consume Quil code may support a variety of functions
+that operate on classical data. Quil addresses these cases by
+supporting the declaration of <tt>EXTERN</tt> functions.
+</p><a name='9-3-1Declaring-Externs' href='#9-3-1Declaring-Externs'><h4>9.3.1. Declaring Externs</h4></a>
+<p>Declaring an identifier to be an extern indicates that the
+identifier can appear in <tt>CALL</tt> instructions.
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Extern Function Declaration</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>EXTERN <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+<p>Each <tt>EXTERN</tt> identifier must be unique within a program (case-sensitive).
+Additionally, <tt>EXTERN</tt> identifiers must not conflict with any reserved Quil
+keywords or standard gate definitions.
+</p><a name='9-3-2Extern-Signature-Pragmas' href='#9-3-2Extern-Signature-Pragmas'><h4>9.3.2. Extern Signature Pragmas</h4></a>
+<p>Under some circumstances it may be desirable to specify the
+function signature of an <tt>EXTERN</tt> function. Signature declarations are
+supplied by way of a pragma.
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Extern Signature Pragma</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>PRAGMA EXTERN <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span> &quot;<span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Extern Signature</span><span class='meta-syntax'>&#x27E9;</span>&quot;</code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Extern Signature</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Base Type</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>?</sup></span> ( <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Extern Parameter</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>, <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Extern Parameter</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>*</sup></span> )</code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Extern Parameter</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span> : mut<span class='meta-syntax'><sup>?</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Extern Type</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Extern Type</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Type</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Base Type</span><span class='meta-syntax'>&#x27E9;</span>[]</code></td></tr></table></div>
+<p>The &quot;[]&quot; suffix indicates a variable-length array; that is, a parameter
+for which there is no length restriction.
+</p>
+<pre class='source-code'>DECLARE array1 INTEGER[5]
+DECLARE array2 INTEGER[10]
+EXTERN foo &quot;(param : INTEGER[])&quot;
+
+# both of these are valid
+CALL foo array1
+CALL foo array2</pre>
+<p>Type signatures to extern functions require every function parameter to be named. Additionally, the signature must either specify a return type or at least one parameter.
+</p><a name='9-3-3Call-Instructions' href='#9-3-3Call-Instructions'><h4>9.3.3. Call Instructions</h4></a>
+<p>Declared <tt>EXTERN</tt>s may appear in <tt>CALL</tt> instructions.  The precise
+effect of an <tt>EXTERN</tt> function on classical memory is left up to the
+implementor. From the perspective of the abstract machine, the effect
+of processing a <tt>CALL</tt> instruction is to increment the program counter.
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Extern Call Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>CALL <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'> | </span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Memory Reference</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'> | </span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Complex</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>+</sup></span></code></p></div>
+<p>Note, for every <tt>CALL</tt> instruction, there must be a corresponding <tt>EXTERN</tt>
+declaration of the same identifier (case-sensitive). There is no restriction
+on the order of a 
+<span style='color:tomato'>&lt;unknown CONS&gt;
+
+
+</span> instruction relative to its corresponding <tt>EXTERN</tt>
+declaration.
+</p>
+<p>When a function type signature specifies a return type, then calls
+to the associated <tt>EXTERN</tt> are assumed to write a return value to a
+memory reference that appears in the first argument position.
+E.g. the following are equivalent:
+</p>
+<pre class='source-code'>PRAGMA EXTERN rng &quot;INTEGER (seed : INTEGER)&quot;
+EXTERN rng;
+DECLARE num INTEGER
+... snip ...
+
+CALL rng num 10</pre>
+<p>is equivalent to
+</p>
+<pre class='source-code'>PRAGMA EXTERN rng &quot;(out : mut INTEGER, seed : INTEGER)&quot;
+EXTERN rng;
+DECLARE num INTEGER
+... snip ...
+
+CALL rng num 10</pre><a name='9-3-4Externs-in-Arithmetic-Expressions' href='#9-3-4Externs-in-Arithmetic-Expressions'><h4>9.3.4. Externs in Arithmetic Expressions</h4></a>
+<p>Extern <tt>CALL</tt>s may appear in arithmetic expressions with some
+restrictions: the extern MUST have a declared function signature, which
+MUST include a return type, and which MUST NOT include any mutable
+parameters.
+</p>
+<p>For example, this is OK:
+</p>
+<pre class='source-code'>PRAGMA EXTERN prng &quot;REAL (seed : REAL)&quot;
+EXTERN prng;
+RX(prng(pi) / 4)</pre>
+<p>But this is not:
+</p>
+<pre class='source-code'>PRAGMA EXTERN irng &quot;INTEGER (seed : mut INTEGER)&quot;
+EXTERN irng;
+EXTERN prng;
+DECLARE num INTEGER;
+
+... snip ...
+
+RX(irng(num))       # WRONG: the seed parameter is declared mutable
+
+RZ(prng(33))        # WRONG: we don&#039;t know the signature of prng</pre><a name='9-4File-Inclusion' href='#9-4File-Inclusion'><h3>9.4. File Inclusion</h3></a>
 <p>One can include a valid Quil file in another valid Quil file by
 inclusion.
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>File Include</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>INCLUDE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>String</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
 <p>Here, <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>String</span><span class='meta-syntax'>&#x27E9;</span> denotes a file name. Implementations processing
 Quil must support and document individual file names, and may support
 operating-system-dependent file paths.
-</p><a name='10Circuits'><h2>10. Circuits</h2></a><a name='10-1Circuit-Syntax'><h3>10.1. Circuit Syntax</h3></a>
+</p><a name='10Circuits' href='#10Circuits'><h2>10. Circuits</h2></a><a name='10-1Circuit-Syntax' href='#10-1Circuit-Syntax'><h3>10.1. Circuit Syntax</h3></a>
 <p>Circuits in Quil are parameterized templates of instructions that
 can be filled in with parameters and arguments. Circuit applications
 within a program are expanded according to the circuit&#039;s definition in
@@ -1611,19 +1826,21 @@ parameter substitution. It is included mainly to help with the
 debugging and human readability of Quil code. Circuits in Quil are
 more like C preprocessor macros than they are like functions. The QAM
 has no notion of a circuit as a part of its semantics; circuits are
-simply notational conveniences.</p>
+simply notational conveniences. If the definition of an actual gate
+in terms of other gates is desired, a <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sequence Gate Definition</span><span class='meta-syntax'>&#x27E9;</span> 
+accomplishes this.</p>
 <p>A circuit is defined with the <tt>DEFGATE</tt> directive.
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Circuit Definition</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFCIRCUIT <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>(<span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameters</span><span class='meta-syntax'>&#x27E9;</span>)<span class='meta-syntax'>)</span><span class='meta-syntax'><sup>?</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Arguments</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>?</sup></span>
 :
-<span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Circuit Instruction</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span></code></p></div>
+<span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Circuit Line</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span><span class='meta-syntax'>(</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Newline</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'> | </span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-descriptive'>End of File</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span></code></p></div>
 <p>Within the circuit body, we can write any Quil instruction,
 allowing for the named parameters and arguments to show up as
 instruction parameters or arguments.
-</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Circuit Instruction</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Indent</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Instruction</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Terminator</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Circuit Line</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Indent</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Instruction</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>;<span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Instruction</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>*</sup></span></code></p></div>
 <p>A circuit may be used similarly to a gate:
 </p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Circuit Application</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>(
                 <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression List</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>?</sup></span>
-            )<span class='meta-syntax'>)</span><span class='meta-syntax'><sup>?</sup></span><span class='meta-syntax'>(</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Formal Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'> | </span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Memory Reference</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>+</sup></span></code></p></div><a name='10-2Circuit-Expansion'><h3>10.2. Circuit Expansion</h3></a>
+            )<span class='meta-syntax'>)</span><span class='meta-syntax'><sup>?</sup></span><span class='meta-syntax'>(</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Formal Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'> | </span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Memory Reference</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>+</sup></span></code></p></div><a name='10-2Circuit-Expansion' href='#10-2Circuit-Expansion'><h3>10.2. Circuit Expansion</h3></a>
 <p>Circuits are expanded recursively, outside in. Circuits may not be
 self-recursive or mutually recursive. These circuits are invalid
 because they exhibit different kinds of non-terminating recursion.
@@ -1676,7 +1893,7 @@ erroneous attempt to jump from one local circuit body to another.
 
 Lines (E) and (F) are both invalid because they are attempts to jump
 into a local circuit definition.
-</p><a name='11History-and-Changes'><h2>11. History and Changes</h2></a><a name='11-1A-History-of-Quil'><h3>11.1. A History of Quil</h3></a>
+</p><a name='11History-and-Changes' href='#11History-and-Changes'><h2>11. History and Changes</h2></a><a name='11-1A-History-of-Quil' href='#11-1A-History-of-Quil'><h3>11.1. A History of Quil</h3></a>
 <p>In 2016, at Rigetti Computing, Quil was defined in an <a href='https://arxiv.org/abs/1608.03355'>arXiv paper</a> entitled &quot;A Practical
 Quantum Instruction Set Architecture&quot; by R. Smith, M. Curtis, and
 W. Zeng.
@@ -1715,42 +1932,32 @@ from all previous official sources on the language.
 benefited greatly from their international userbase. Quil has also
 benefited from a diverse ecosystem of other quantum computing
 languages, such as OpenQASM, Quipper, Q#, and QCL.
-</p><a name='11-2Changes'><h3>11.2. Changes</h3></a>
+</p><a name='11-2Changes' href='#11-2Changes'><h3>11.2. Changes</h3></a>
 <p><em>This document only tracks changes since its conception.</em>
 </p>
-<p><ul><li>July 2021: Document created.</li></ul>
-</p><a name='12Annex-T--Pulse-Level-Control'><h2>12. Annex T: Pulse-Level Control</h2></a>
+<p><ul><li>July 2021: Document created.</li></ul><ul><li>March 2022: Sequence gate definition feature added. (Parker Williams, HRL Laboratories)</li></ul>
+</p><a name='12Annex-T--Pulse-Level-Control' href='#12Annex-T--Pulse-Level-Control'><h2>12. Annex T: Pulse-Level Control</h2></a>
 <p>This section is about time-domain extensions to Quil, formally known as <em>Annex T</em> of this document, but also known as <em>Quil-T</em>.
-</p><a name='12-1Frames'><h3>12.1. Frames</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Identifier</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>String</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Identifier</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+</p><a name='12-1Frames' href='#12-1Frames'><h3>12.1. Frames</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Identifier</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>String</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Identifier</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
 <p>A frame encapsulates any rotating frame relative to which control/readout
 waveforms may be defined. For the purposes of scheduling and execution on
 possibly heterogenous hardware, frames are specified with respect to a specific
 list of qubits. Thus, <tt>0 1 &quot;cz&quot;</tt> is the &quot;cz&quot; frame on qubits 0 and 1. The order
 of the qubits matters. In particular, the above frame may differ from <tt>1 0 &quot;cz&quot;</tt>.
-</p><a name='12-1-1DEFFRAME'><h4>12.1.1. DEFFRAME</h4></a>
-<p>Quil-T itself has no built-in frames. Frames must be defined using the <tt>DEFFRAME</tt>
-directive.
-</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Definition</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFFRAME <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Specification</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>?</sup></span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Specification</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Indent</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Attribute</span><span class='meta-syntax'>&#x27E9;</span> : <span class='meta-syntax'>(</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'> | </span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>String</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span></code></p></div><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Attribute</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code>SAMPLE-RATE </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> INITIAL-FREQUENCY </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> DIRECTION </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> HARDWARE-OBJECT</code></td></tr></table></div>
+</p><a name='12-1-1DEFFRAME' href='#12-1-1DEFFRAME'><h4>12.1.1. DEFFRAME</h4></a>
+<p>Quil-T itself has no built-in frames. All frames referenced within a program must be defined using the <tt>DEFFRAME</tt> directive.
+</p><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Definition</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFFRAME <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>(</span>: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Specification</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span><span class='meta-syntax'>)</span><span class='meta-syntax'><sup>?</sup></span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Specification</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Indent</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span> : <span class='meta-syntax'>(</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'> | </span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>String</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>)</span></code></p></div>
 <p>All frames used in a program must have a corresponding top-level definition.
 </p>
-<p>Before execution, a Quil-T program is linked with a specific system of control
-hardware, and frames are mapped to suitable hardware objects (cf. the
-<tt>HARDWARE-OBJECT</tt> frame attribute below). Native or canonical frame definitions may be
-provided by a hardware vendor. Some examples of Rigetti&#039;s canonical frames are
-listed below, but this is subject to change.
-</p>
-<p>Examples (names only):
-
-
-<pre class='source-code'>&quot;xy&quot;  # eg. for the drive line
-&quot;ff&quot;  # eg. for a generic flux line
-&quot;cz&quot;  # eg. for a flux pulse for enacting CZ gate
-&quot;iswap&quot;
-&quot;ro&quot;  # eg. for the readout pulse
-&quot;out&quot; # eg. for the capture line</pre>
-</p><a name='12-1-1-1Frame-Attributes'><h4>12.1.1.1. Frame Attributes</h4></a>
-<p>Frame attributes represent quantities associated with a given frame which need not be specified by the programmer, but which are ultimately required to fully link and execute a Quil-T program on a physical device.
-</p><ul><li><tt>SAMPLE-RATE</tt> is a floating point number indicating the rate (in Hz) of the digital-to-analog converter on the control hardware associated with this frame.</li><li><tt>INITIAL-FREQUENCY</tt> is a floating point number indicating the initial frame frequency.</li><li><tt>DIRECTION</tt> is one of <tt>&quot;tx&quot;</tt> or <tt>&quot;rx&quot;</tt>.</li><li><tt>HARDWARE-OBJECT</tt> is a string indicating the (implementation-specific) hardware object that the frame is associated with.</li></ul><a name='12-2Waveforms'><h3>12.2. Waveforms</h3></a><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Waveform</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> flat ( duration: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, iq: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> )
+<p>Before execution, a Quil-T program is compiled to target a specific hardware control system,
+and frames are mapped to suitable components of that control system. Native or canonical frame definitions may be
+provided by a hardware vendor.
+</p><a name='12-1-1-1Frame-Attributes' href='#12-1-1-1Frame-Attributes'><h4>12.1.1.1. Frame Attributes</h4></a>
+<p>Frame attributes describe a frame in a way that supports compilation on a particular hardware device. 
+These attributes take the form of a mapping with arbitrary string keys. The particular keys and their values
+are specific to the hardware vendor; consult their documentation for more information. Whether these may be
+modified by the program author or are simply provided for read-only reference depends on the vendor.
+</p><a name='12-2Waveforms' href='#12-2Waveforms'><h3>12.2. Waveforms</h3></a><div class='syntax'><table border='0' cellpadding='4'><tr><td style='text-align:right'><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Waveform</span><span class='meta-syntax'>&#x27E9;</span> ::=</td><td><code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span></code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> flat ( duration: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, iq: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> )
 </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> gaussian ( duration: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, fwhm: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, t0: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> )
 </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> draggaussian ( duration: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, fwhm: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, t0: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, anh: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, alpha: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> )
 </code></td></tr><tr><td style='text-align:right'><span class='meta-syntax'>|</span></td><td><code> erfsquare ( duration: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, risetime: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, padleft: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span>, padright: <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span> )</code></td></tr></table></div>
@@ -1775,24 +1982,25 @@ listed below, but this is subject to change.
       the pulse in seconds</li><li><tt>padleft</tt> is a rational number representing the amount of zero-amplitude
       padding to add to the left of the pulse</li><li><tt>padright</tt> is a rational number representing the amount of zero-amplitude
       padding to add to the right of the pulse</li></ul></li></ul>
-</p><a name='12-2-1Defining-new-waveforms'><h4>12.2.1. Defining new waveforms</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sample Rate</span><span class='meta-syntax'>&#x27E9;</span> ::= <code><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Waveform Definition</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFWAVEFORM <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span> ( <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameters</span><span class='meta-syntax'>&#x27E9;</span> ) <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Sample Rate</span><span class='meta-syntax'>&#x27E9;</span> : <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Matrix Entries</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
-<p>New waveforms may be defined by specifying the sample rate (in
-Hertz) and listing out all the IQ values as complex numbers, separated
-by commas. Waveform definitions may also be parameterized, although
-note that Quil has no support for vector level operations.
+</p><a name='12-2-1Defining-new-waveforms' href='#12-2-1Defining-new-waveforms'><h4>12.2.1. Defining new waveforms</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Waveform Definition</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFWAVEFORM <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span>( <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameters</span><span class='meta-syntax'>&#x27E9;</span> )<span class='meta-syntax'><sup>?</sup></span> : <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Matrix Entries</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+<p>New waveforms may be defined by listing out all the IQ values as
+complex numbers, separated by commas. Waveform definitions may also be
+parameterized, although note that Quil has no support for vector level
+operations.
 </p>
 <p>Example:
 
-<pre class='source-code'>DEFWAVEFORM my_custom_waveform 6.0:
+<pre class='source-code'>DEFWAVEFORM my_custom_waveform:
     1+2i, 3+4i, 5+6i
 
-DEFWAVEFORM my_custom_parameterized_waveform(%a) 6.0:
+DEFWAVEFORM my_custom_parameterized_waveform(%a):
     (1+2i)*%a, (3+4i)*%a, (5+6i)*%a</pre>
 </p>
-<p>The duration (in seconds) of a custom waveform may be computed by dividing the
-number of samples by the sample rate. In the above example, both waveforms have
-a duration of 0.5 seconds.
-</p><a name='12-3Pulses'><h3>12.3. Pulses</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Pulse</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>PULSE Frame Waveform</code></p></div>
+<p>A waveform is just a list of samples. The duration of a waveform is
+determined by the number of samples divided by the sample rate of the
+frame on which the waveform is pulsed. Frames have fixed,
+hardware-specific sample rates.
+</p><a name='12-3Pulses' href='#12-3Pulses'><h3>12.3. Pulses</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Pulse</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>PULSE Frame Waveform</code></p></div>
 <p>Pulses represent the propagation of a specific waveform (either built-in or custom) on a specific frame.
 </p>
 <p>Examples:
@@ -1813,13 +2021,13 @@ PULSE 0 1 &quot;cz&quot; flat(duration: 1e-6, iq: 2+3i)</pre>
 <p>Each frame has a fixed, hardware-specific sample rate. The behavior of a <tt>PULSE</tt>
 instruction with a custom waveform whose sample rate does not match the
 corresponding frame&#039;s sample rate is undefined.
-</p><a name='12-4Frame-Mutations'><h3>12.4. Frame Mutations</h3></a><a name='12-4-1Frequency'><h4>12.4.1. Frequency</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Set Frequency</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SET-FREQUENCY <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Shift Frequency</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SHIFT-FREQUENCY <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+</p><a name='12-4Frame-Mutations' href='#12-4Frame-Mutations'><h3>12.4. Frame Mutations</h3></a><a name='12-4-1Frequency' href='#12-4-1Frequency'><h4>12.4.1. Frequency</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Set Frequency</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SET-FREQUENCY <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Shift Frequency</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SHIFT-FREQUENCY <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
 <p>Each frame has a frequency which is tracked throughout the program. Initial
 frame frequencies are specified in the frame definition&#039;s <tt>INITIAL-FREQUENCY</tt>
 attribute. Subsequent code may update this, either assigning an absolute value (<tt>SET-FREQUENCY</tt>) or a relative offset (<tt>SHIFT-FREQUENCY</tt>).
 </p>
 <pre class='source-code'>SET-FREQUENCY 0 &quot;xy&quot; 5.4e9
-SHIFT-FREQUENCY 0 &quot;ro&quot; 6.1e9</pre><a name='12-4-2Phase'><h4>12.4.2. Phase</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Set Phase</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SET-PHASE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Shift Phase</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SHIFT-PHASE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Swap Phases</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SWAP-PHASES <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+SHIFT-FREQUENCY 0 &quot;ro&quot; 6.1e9</pre><a name='12-4-2Phase' href='#12-4-2Phase'><h4>12.4.2. Phase</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Set Phase</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SET-PHASE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Shift Phase</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SHIFT-PHASE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Swap Phases</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SWAP-PHASES <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
 <p>Each frame has a phase which is tracked throughout the program. Initially the
 phase starts out as 0. It may be set or shifted up and down, as well as swapped
 with other frames.
@@ -1837,7 +2045,7 @@ SHIFT-PHASE 0 &quot;xy&quot; -pi
 SHIFT-PHASE 0 &quot;xy&quot; %theta*2/pi
 
 SWAP-PHASE 0 &quot;xy&quot; 1 &quot;xy&quot;</pre>
-</p><a name='12-4-3Scale'><h4>12.4.3. Scale</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Set Scale</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SET-SCALE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+</p><a name='12-4-3Scale' href='#12-4-3Scale'><h4>12.4.3. Scale</h4></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Set Scale</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>SET-SCALE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Real</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
 <p>Each frame has a scale which is tracked throughout the program. The
 scale is initially 1.
 </p>
@@ -1845,7 +2053,7 @@ scale is initially 1.
 
 
 <pre class='source-code'>SET-SCALE 0 &quot;xy&quot; 0.75</pre>
-</p><a name='12-5Capture'><h3>12.5. Capture</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Capture</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>CAPTURE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Waveform</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Memory Reference</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Raw Capture</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>RAW-CAPTURE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Memory Reference</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
+</p><a name='12-5Capture' href='#12-5Capture'><h3>12.5. Capture</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Capture</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>CAPTURE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Waveform</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Memory Reference</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Raw Capture</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>RAW-CAPTURE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Memory Reference</span><span class='meta-syntax'>&#x27E9;</span></code></p></div>
 <p>The capture instruction opens up the readout on a frame and measures its state.
 An integration waveform will be applied to the raw IQ points and the result is
 placed in classical memory.
@@ -1869,7 +2077,7 @@ CAPTURE 0 &quot;out&quot; 200e-6 iqs</pre>
 </p>
 <p>The behavior of a <tt>CAPTURE</tt> instruction with a custom waveform whose sample rate
 does not match the corresponding frame&#039;s sample rate is undefined.
-</p><a name='12-6Defining-Calibrations'><h3>12.6. Defining Calibrations</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Calibration Definition</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFCAL <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Modifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span> ( <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameters</span><span class='meta-syntax'>&#x27E9;</span> ) <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span> : <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Instruction</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Measure Calibration</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFCAL <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>?</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameter</span><span class='meta-syntax'>&#x27E9;</span> : <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Instruction</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span></code></p></div>
+</p><a name='12-6Defining-Calibrations' href='#12-6Defining-Calibrations'><h3>12.6. Defining Calibrations</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Calibration Definition</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFCAL <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Modifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Identifier</span><span class='meta-syntax'>&#x27E9;</span> ( <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameters</span><span class='meta-syntax'>&#x27E9;</span> ) <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Formal Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span> : <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Instruction</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Measure Calibration</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DEFCAL MEASURE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Formal Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Parameter</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>?</sup></span> : <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Instruction</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span></code></p></div>
 <p>Calibrations for high-level gates can be defined by mapping a combination of
 (gate name, parameters, qubits) to a sequence of analog control instructions.
 </p>
@@ -1883,7 +2091,7 @@ first match will be taken.
 </p>
 <p>For example, given the following list of calibration definitions in this order:
 
-<ol><li><tt>DEFCAL RX(%theta) %qubit:</tt></li><li><tt>DEFCAL RX(%theta) 0:</tt></li><li><tt>DEFCAL RX(pi/2) 0:</tt></li></ol>
+<ol><li><tt>DEFCAL RX(%theta) qubit:</tt></li><li><tt>DEFCAL RX(%theta) 0:</tt></li><li><tt>DEFCAL RX(pi/2) 0:</tt></li></ol>
 
 The instruction <tt>RX(pi/2) 0</tt> would match (3), the instruction <tt>RX(pi) 0</tt> would
 match (2), and the instruction <tt>RX(pi/2) 1</tt> would match (1).
@@ -1904,8 +2112,8 @@ DEFCAL RX(%theta) 0:
     PULSE 0 &quot;xy&quot; flat(duration: 1e-6, iq: 2+3i)*%theta/(2*pi)
 
 # Applying RZ to any qubit
-DEFCAL RZ(%theta) %qubit:
-    SHIFT-PHASE %qubit &quot;xy&quot; %theta
+DEFCAL RZ(%theta) qubit:
+    SHIFT-PHASE qubit &quot;xy&quot; %theta
 
 # Measurement and classification
 DEFCAL MEASURE 0 %dest:
@@ -1927,7 +2135,7 @@ DEFCAL DAGGER T 0:
 
 the first calibration definition matches <tt>T 0</tt>, the second matches <tt>DAGGER T 0</tt>,
 and neither match <tt>DAGGER DAGGER T 0</tt>.
-</p><a name='12-7Timing-and-Synchronization'><h3>12.7. Timing and Synchronization</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Delay</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DELAY <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Fence</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>FENCE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span></code></p></div>
+</p><a name='12-7Timing-and-Synchronization' href='#12-7Timing-and-Synchronization'><h3>12.7. Timing and Synchronization</h3></a><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Delay</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>DELAY <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>+</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Frame Identifier</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Expression</span><span class='meta-syntax'>&#x27E9;</span></code></p></div><div class='syntax'><p><span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Fence</span><span class='meta-syntax'>&#x27E9;</span> ::= <code>FENCE <span class='meta-syntax'>&#x27E8;</span><span class='meta-syntax-identifier'>Qubit</span><span class='meta-syntax'>&#x27E9;</span><span class='meta-syntax'><sup>*</sup></span></code></p></div>
 <p>Delay allows for the insertion of a gap within a list of pulses or gates with
 a specified duration in seconds.
 </p>
